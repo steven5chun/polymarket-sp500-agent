@@ -78,7 +78,7 @@ The system operates using an advanced multi-agent design powered by **CrewAI** /
 ### 1. Set Up the Local Python Environment
 Clone this project directory and install the necessary modular packages:
 ```bash
-git clone https://github.com
+git clone https://github.com/steven5chun/polymarket-sp500-agent
 cd polymarket-sp500-agent
 pip install -r requirements.txt
 ```
@@ -86,7 +86,7 @@ pip install -r requirements.txt
 ### 2. Connect the open-source MCP Server
 Initialize the native prediction market data context protocol module inside your local directory:
 ```bash
-git clone https://github.com
+git clone https://github.com/JamesANZ/prediction-market-mcp
 cd prediction-market-mcp
 npm install
 npm run build
