@@ -6,7 +6,7 @@ An autonomous multi-agent framework that fetches all active Polymarket contracts
 
 ## Overview
 
-This project leverages the **"Wisdom of the Crowds"** by tracking [prediction markets](prediction-market.md) where capital allocators back their economic perspectives with real money. The system:
+This project leverages the **"Wisdom of the Crowds"** by tracking [prediction markets](prediction-markets.md) where capital allocators back their economic perspectives with real money. The system:
 
 1. Fetches **all active Polymarket contracts** (volume > $50K OR liquidity > $50K)
 2. Caches contracts to `data/polymarket-contracts.csv` (refreshed daily)
