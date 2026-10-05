@@ -1,0 +1,456 @@
+cache_date,cache_timestamp,id,question,description,slug,volume,liquidity,start_date,end_date,yes_price,no_price,midpoint,outcomes,outcome_prices,token_ids,active,_relevance_score
+2026-10-04,2026-10-04T13:11:35.336780+00:00,4864338,Spread: Saints (-7.5),"In the upcoming NFL football game between Falcons and Saints, scheduled for October 5 at 8:15 PM ET:
+
+This market will resolve to ""Saints"" if the Saints win the game by 8 or more points.
+
+Otherwise, this market will resolve to ""Falcons"".
+
+Overtime is included if played.
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50-50.",nfl-atl-no-2026-10-06-spread-home-7pt5,10.0,92283.1379,2026-09-22T21:41:39Z,2026-10-06T00:15:00Z,0.27,0.73,,"['Saints', 'Falcons']","['0.27', '0.73']","['[""2694602739327961926153712676963225189747020209852062283057224295837751414905""', '""51545665707507607076775292310274099677714355073262841249126700891743974645837""]']",True,0
+2026-10-04,2026-10-04T13:11:35.336866+00:00,4835355,Will Sweden win on 2026-10-05?,"In the upcoming game, scheduled for October 5, 2026
+If Sweden wins, this market will resolve to ""Yes"".
+Otherwise, this market will resolve to ""No"".
+If the game is postponed, this market will remain open until the game has been completed.
+If the game is canceled entirely, with no make-up game, this market will resolve ""No"".
+This market refers only to the outcome within the first 90 minutes of regular play plus stoppage time.
+
+The primary resolution source for this market is the official statistic",unl-rom-swe-2026-10-05-swe,10012.134473999999,63353.9304,2026-09-22T10:00:30Z,2026-10-05T18:45:00Z,0.555,0.445,,"['Yes', 'No']","['0.555', '0.445']","['[""79048631080752918471135422146125024265315017052244131108778004877717971269076""', '""37869310580564040706608927344393951303921285116588110713192011330571749847556""]']",True,0
+2026-10-04,2026-10-04T13:11:35.336885+00:00,2668742,Will the New Orleans Pelicans be the 2027 NBA Western Conference Champion?,"This market will resolve according to the team that wins the Western Conference Finals for the 2027 NBA Playoffs.
+
+If at any point it becomes impossible for a listed team to win the 2027 Western Conference Finals per the rules of NBA (e.g., they are eliminated in the playoffs), the corresponding market will resolve to “No”.
+
+If the 2027 NBA season is cancelled, postponed after June 30, 2027, 11:59 PM ET, or there is otherwise no winner declared within that timeframe, this market will resolve to ",will-the-new-orleans-pelicans-be-the-2027-nba-western-conference-champion-20260624160106906,1001.2797999999998,57927.39834,2026-06-24T16:22:56.239196Z,2027-07-01T03:59:00Z,0.006,0.994,,"['Yes', 'No']","['0.006', '0.994']","['[""70937779527404545461888977998185974957033992357213508918694837061527337268436""', '""94435025185163010439644271385738734550668857118779633016473496634028354281215""]']",True,0
+2026-10-04,2026-10-04T13:11:35.336907+00:00,2324605,Will Oura's market cap be between $7.5B and $10B at market close on IPO day?,"This market will resolve based on Oura's market capitalization at the closing price on its first day of trading.
+
+If no IPO occurs by December 31, 2026, 11:59 PM ET, the market will resolve to ""No IPO before January 2027"".
+
+Market capitalization expresses the monetary value of a company’s outstanding shares, stated in its pricing currency. It is calculated as the number of shares outstanding multiplied by the closing share price on the first trading day.
+
+If the relevant value falls exactly betw",will-ouras-market-cap-be-between-7pt5b-and-10b-at-market-close-on-ipo-day,100166.22294300003,1635.80699,2026-05-26T16:31:47.770599Z,2027-01-01T04:59:00Z,0.032,0.968,,"['Yes', 'No']","['0.032', '0.968']","['[""12689182484229854877669526860350721774940981883026493278950506200273140206090""', '""58839448238088121440827860877000138841238483220907178737498825222227140030906""]']",True,0
+2026-10-04,2026-10-04T13:11:35.336924+00:00,1067836,Will Lighter reach $8 before 2027?,"This market will immediately resolve to “Yes” if any Lighter 1-minute candle for Lighter (LIT/USDC) between December 30, 2025, 14:25 and December 31, 2026, 23:59 ET has a final “High” price equal to or greater than the price specified in the title. Otherwise, the market will resolve to “No.”
+
+The resolution source for this market is Lighter, specifically the LIT/USDC “High” prices available at:
+https://app.lighter.xyz/trade/LIT_USDC
+with the chart set to “1m” (one-minute candles) on the top bar.",will-lighter-reach-8-before-2027,100239.11615600002,10711.71095,2025-12-30T20:04:18.88113Z,2027-01-01T05:00:00Z,0.1545,0.8455,,"['Yes', 'No']","['0.1545', '0.8455']","['[""94903653895249788504252327241048238794342890108756251095709429796382889036685""', '""38921137804958606873954386551995750036647223748250008779379382709688205036254""]']",True,0
+2026-10-04,2026-10-04T13:11:35.336940+00:00,2821918,Will there be two UK Prime Ministers by end of 2027?,"This market will resolve to the number of unique individuals who officially hold the office of Prime Minister of the United Kingdom at any point between market creation and December 31, 2027, 11:59 PM ET.
+
+This market will resolve based on the number of unique individuals to hold the position. For example, if an individual is appointed twice within the specified timeframe, they will only count once for resolution.
+
+To count for resolution, an individual must have been officially appointed by the",will-there-be-two-uk-prime-ministers-by-end-of-2027-20260706201826010,100286.89161799998,47429.7769,2026-07-06T21:25:52.863241Z,2028-01-01T04:59:00Z,0.875,0.125,,"['Yes', 'No']","['0.875', '0.125']","['[""74054127742808013740618909369986030099540445285666007211936076759460569666014""', '""29729420711118931312845832693234240334052027099414529334209485202103813563008""]']",True,0
+2026-10-04,2026-10-04T13:11:35.336953+00:00,3875243,Spread: Packers (-2.5),"In the upcoming NFL game, scheduled for October 4 at 1:00 PM ET:
+
+This market will resolve to ""Packers"" if the Packers win the game by 3 or more points.
+
+Otherwise, this market will resolve to ""Buccaneers"". If the game ends in a tie, this market will resolve to ""Buccaneers"".
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50-50.",nfl-gb-tb-2026-10-04-spread-away-2pt5,1005.200517,153342.608,2026-08-25T16:00:57Z,2026-10-04T17:00:00Z,0.545,0.455,,"['Packers', 'Buccaneers']","['0.545', '0.455']","['[""68230580150439714286777984916024661767182927411692074731947976440339045727631""', '""74325926428136551020110624674404209743398681860302185482375665780226174645132""]']",True,0
+2026-10-04,2026-10-04T13:11:35.336968+00:00,5205505,Valorant: FUT Esports vs T1 (BO3) - VCT Champions Group A,"This market refers to the Valorant Decider match between FUT Esports and T1 in the VCT Champions Group A, initially scheduled for October 4, 2026 at 8:00 AM ET.
+
+This market will resolve to ""FUT Esports"" if FUT Esports win the match against T1.
+
+This market will resolve to ""T1"" if T1 win the match against FUT Esports.
+
+If the match is canceled (not played at all) or ends in a tie, this market will resolve to 50-50.
+
+If the match is postponed, it must be rescheduled to a start time on or before O",val-fut1-t1-2026-10-04,1005857.8799460001,67073.8275,2026-10-02T14:59:29Z,2026-10-04T17:30:00Z,0.24,0.76,,"['FUT Esports', 'T1']","['0.24', '0.76']","['[""57837961479754024222099988214708466319635881841936810069118754510629458571806""', '""27919922978756161571429250331761648277813203244796912470277590868572109960075""]']",True,0
+2026-10-04,2026-10-04T13:11:35.336980+00:00,676744,Will Saudi Aramco be the largest company in the world by market cap on December 31?,"This market will resolve to the largest company in the world by market cap on December 31, 2026, as of market close.
+
+The resolution source for this market will be a consensus of credible reporting.",will-saudi-aramco-be-the-largest-company-in-the-world-by-market-cap-on-december-31-584,1006007.557029,228998.59744,2025-11-12T21:16:59.556352Z,2027-01-01T04:59:00Z,0.0015,0.9985,,"['Yes', 'No']","['0.0015', '0.9985']","['[""73927186257882802877663040737479279251981612783026680169571204930062095676076""', '""61800098061400727617846631920852564041596981000809836996003699088143705766482""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337171+00:00,559655,Will Josh Shapiro win the 2028 Democratic presidential nomination?,"This market will resolve to “Yes” if the named individual wins and accepts the 2028 nomination of the Democratic Party for U.S. president. Otherwise, this market will resolve to “No”.
+
+The resolution source for this market will be a consensus of official Democratic Party sources.
+
+Any replacement of the democratic nominee before election day will not change the resolution of the market.",will-josh-shapiro-win-the-2028-democratic-presidential-nomination-977,10069248.524027986,291666.31052,2025-07-11T18:36:01.098Z,2028-11-08T04:59:00Z,0.058,0.942,,"['Yes', 'No']","['0.058', '0.942']","['[""71169839497420596285841847514123589847893415750912355173877524195175834054354""', '""55290827599553280245963175724940496753557722439999671239772487781170052583987""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337192+00:00,3871405,Colts vs. Commanders,"In the upcoming NFL game, scheduled for October 4 at 9:30AM ET:
+If Colts wins, the market will resolve to ""Colts"".
+If Commanders wins, the market will resolve to ""Commanders"".
+If the game is postponed, this market will remain open until the game has been completed.
+If the game is canceled entirely or ends in a tie, with no make-up game, this market will resolve 50-50.",nfl-ind-was-2026-10-04,1007178.2113150002,1514869.8676,2026-08-25T12:00:47Z,2026-10-04T13:30:00Z,0.665,0.335,,"['Colts', 'Commanders']","['0.665', '0.335']","['[""55191072292387454815694753195916103150712742081012585602610134124350197643160""', '""14989640499892393230652279129128061254515881318826836990208837181485887480029""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337203+00:00,1366016,Will Carlos Roberto Massa Júnior win the first round of the 2026 Brazilian presidential election?,"A presidential election is scheduled to take place in Brazil on October 4, 2026.
+
+This market will resolve according to the margin of victory between the top two candidates in the first round of the next Brazil Presidential Election.
+
+For the purpose of this market, the “margin of victory” is defined as the absolute difference between the percentages of valid votes received by the first- and second-place candidates. Percentages of the valid votes received by each candidate will be determined by ",will-carlos-roberto-massa-jnior-win-the-first-round-of-the-2026-brazilian-presidential-election,10075.553492000001,56103.74544,2026-02-11T22:49:53.41425Z,2026-10-05T03:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""48237610808655602451252745673035721002146805186546999349082405380140320056791""', '""34691135979724685003302612453350395231351112907973284703206145013152583035126""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337221+00:00,630964,Will the Republicans win the Texas Senate race in 2026?,"This market will resolve according to the winner of the 2026 midterm Texas U.S. Senate election, inclusive of any run-offs.
+
+A candidate shall be considered to represent a party in the event that he or she is the nominee of the party in question. Candidates other than the Democratic or Republican nominee (e.g., Greens, Libertarian, independent) may be added at a later date.
+
+Candidates who run as independents will not be encompassed by the “Democrat” or “Republican” options regardless of any aff",will-the-republicans-win-the-texas-senate-race-in-2026,1008059.5682200006,242563.9614,2025-10-13T21:28:56.505Z,2026-11-04T04:59:00Z,0.365,0.635,,"['Yes', 'No']","['0.365', '0.635']","['[""21265207456609426291246075480390336499088453711419597084147957999650569091884""', '""9846414914422486942750462555692240718767368950832862364324602361738794436048""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337235+00:00,4787062,Spread: Austria (-1.5),"In the upcoming UEFA Nations League game, scheduled for October 4 at 12:00 PM ET:
+
+This market will resolve to ""Austria"" if Austria win the game by 2 or more goals.
+
+Otherwise, this market will resolve to ""Kosovo"".
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50–50.
+
+This market will resolve according to the official final score published on uefa.com. This market refers ",unl-kvx-aut-2026-10-04-spread-away-1pt5,100.844135,103169.8907,2026-09-21T10:32:06Z,2026-10-04T16:00:00Z,0.235,0.765,,"['Austria', 'Kosovo']","['0.235', '0.765']","['[""92809224516501978592558779015549399806846183240746032917221149984148205906542""', '""32002715598465728855886770353071250203858705592872899296699671659475152803834""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337248+00:00,1294365,"Will Gold (GC) hit (HIGH) $10,000 by end of December?","This market will resolve to ""Yes"" if, on any trading day, the official CME settlement price for the Active Month (front month) of Gold (GC) futures is equal to or above the listed price by the final trading day of December 2026. Otherwise, the market will resolve to ""No"".
+
+For CME Gold (GC) futures contracts, the Active Month is the nearest of CME's designated delivery-cycle months (February, April, June, August, October, December) that is not the spot month. The Active Month changes automatical",will-gold-gc-hit-high-10000-by-end-of-december,100876.473372,61731.76215,2026-01-29T20:49:46.052694Z,2026-12-31T00:00:00Z,0.016,0.984,,"['Yes', 'No']","['0.016', '0.984']","['[""74001374856634428763440374967534258978975508176395625640542693918337688595715""', '""5803605637445425150919466572237959294284008433415696396006190224187883089518""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337262+00:00,1349150,Will FC Dallas win the 2026 MLS Cup?,"This market will resolve according to the team that wins the 2026 MLS Cup. 
+
+If at any point it becomes impossible for a listed team to win the 2026 MLS Cup per the rules of MLS (e.g. they are mathematically eliminated), the corresponding market will resolve to “No”.
+
+If the 2026 MLS season is cancelled, postponed after December 31, 2026 ET, or there is otherwise no winner declared within that timeframe, this market will resolve to “Other”.
+
+The primary resolution source will be official informa",will-fc-dallas-win-the-2026-mls-cup,100892.877777,31446.34424,2026-02-17T23:30:58.889941Z,2027-01-01T04:59:00Z,0.047,0.953,,"['Yes', 'No']","['0.047', '0.953']","['[""85186607695790882958983542611083554598869917573491880520954590525861297957988""', '""30273419270813447379243933173871506324749398308368755368739636493172023241977""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337274+00:00,630963,Will the Democrats win the Texas Senate race in 2026?,"This market will resolve according to the winner of the 2026 midterm Texas U.S. Senate election, inclusive of any run-offs.
+
+A candidate shall be considered to represent a party in the event that he or she is the nominee of the party in question. Candidates other than the Democratic or Republican nominee (e.g., Greens, Libertarian, independent) may be added at a later date.
+
+Candidates who run as independents will not be encompassed by the “Democrat” or “Republican” options regardless of any aff",will-the-democrats-win-the-texas-senate-race-in-2026,1009971.5127250002,223999.493,2025-10-13T21:28:53.882Z,2026-11-04T04:59:00Z,0.635,0.365,,"['Yes', 'No']","['0.635', '0.365']","['[""15290572385458522370285732869432740297199321382471116558439914335588167718663""', '""25172545206000541692667496253531562288536270988826888609620735617040533835056""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337291+00:00,4786417,Exact Score: Greece 2 - 0 Germany?,"In the upcoming UEFA Nations League game between Greece and Germany, scheduled for October 4, 2026 at 2:45 PM ET: This market will resolve based on the final score of the Greece vs. Germany match originally scheduled for October 4, 2026 at 2:45 PM ET, considering only the result at the end of 90 minutes of regulation plus stoppage time; extra time and penalty shoot-outs are excluded. If the actual score is not one of the explicitly listed outcomes, the market resolves to ""Any Other Score."" If th",unl-grc-ger-2026-10-04-exact-score-2-0,101.0,134632.04964,2026-09-21T10:02:14Z,2026-10-04T18:45:00Z,0.0275,0.9725,,"['Yes', 'No']","['0.0275', '0.9725']","['[""66725554980117576129738893722348375406776148975852804157715350322020485542185""', '""42080347007638383341996983639618146173661776761220096503506562351311710203717""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337319+00:00,4786421,Exact Score: Greece 3 - 0 Germany?,"In the upcoming UEFA Nations League game between Greece and Germany, scheduled for October 4, 2026 at 2:45 PM ET: This market will resolve based on the final score of the Greece vs. Germany match originally scheduled for October 4, 2026 at 2:45 PM ET, considering only the result at the end of 90 minutes of regulation plus stoppage time; extra time and penalty shoot-outs are excluded. If the actual score is not one of the explicitly listed outcomes, the market resolves to ""Any Other Score."" If th",unl-grc-ger-2026-10-04-exact-score-3-0,101.01109,129912.10978,2026-09-21T10:02:14Z,2026-10-04T18:45:00Z,0.0115,0.9885,,"['Yes', 'No']","['0.0115', '0.9885']","['[""4416962076694990886746899575971534173489762220203856572047096297911301245802""', '""47264104684361831422330749174697787596196704500514500713989415137077915423510""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337331+00:00,2431420,Will Mistral have the best AI model at the end of December 2026?,"This market will resolve according to the company which owns the model which has the highest arena rank based off the Chatbot Arena LLM Leaderboard (https://lmarena.ai/) when the table under the ""Leaderboard"" tab is checked on December 31, 2026, 12:00 PM ET.
+
+Results from the ""Rank"" section on the Leaderboard tab of https://lmarena.ai/leaderboard/text with the style control off will be used to resolve this market.
+
+Models will be ordered primarily by their leaderboard rank at the market’s check ",will-mistral-have-the-best-ai-model-at-the-end-of-december-2026,101025.71761600001,116790.71832,2026-06-04T17:42:29.347911Z,2026-12-31T17:00:00Z,0.0015,0.9985,,"['Yes', 'No']","['0.0015', '0.9985']","['[""66258306997757255429110018391602834962979284290793404130683055523076965648051""', '""45141256094775572226186549272515821712529487250784572132819429033681305795137""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337343+00:00,561280,Will Raphael Warnock win the 2028 US Presidential Election?,"The 2028 US Presidential Election is scheduled to take place on November 7, 2028.
+
+This market will resolve to the person who wins the 2028 US Presidential Election.
+
+The resolution source for this market is the Associated Press, Fox News, and NBC. This market will resolve once all three sources call the race for the same candidate. If all three sources haven’t called the race for the same candidate by the inauguration date (January 20, 2029) this market will resolve based on who is inaugurated.",will-person-ae-win-the-2028-us-presidential-election,1010573.421,271449.6848,2025-07-11T19:06:39.509528Z,2028-11-08T04:59:00Z,0.0025,0.9975,,"['Yes', 'No']","['0.0025', '0.9975']","['[""5019810753168153471323122473105082718702229310401435759781569586768450866932""', '""40124365841715577281967397943205975756839079590013082886367841247396523029061""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337355+00:00,1366009,Will Luiz Inácio Lula da Silva win the first round of the 2026 Brazilian presidential election by 10–15%?,"A presidential election is scheduled to take place in Brazil on October 4, 2026.
+
+This market will resolve according to the margin of victory between the top two candidates in the first round of the next Brazil Presidential Election.
+
+For the purpose of this market, the “margin of victory” is defined as the absolute difference between the percentages of valid votes received by the first- and second-place candidates. Percentages of the valid votes received by each candidate will be determined by ",will-luiz-incio-lula-da-silva-win-the-first-round-of-the-2026-brazilian-presidential-election-by-1015-995,101104.236411,68813.68395,2026-02-11T22:49:06.342169Z,2026-10-05T03:59:00Z,0.0025,0.9975,,"['Yes', 'No']","['0.0025', '0.9975']","['[""111501008889215248446738380766334499893429002495174888541812674365305743816241""', '""68985689280964359721858876785601369759982303652640879035310084127715508408780""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337369+00:00,2264328,"Russia x Ukraine ceasefire by December 31, 2026?","This market will resolve to ""Yes"" if a ceasefire between Russia and Ukraine goes into effect by 11:59 PM Eastern European Time (EET) on the specified date and remains continuously in effect for at least 10 calendar days. Otherwise, this market will resolve to ""No"".
+
+A ceasefire refers to any mutually agreed suspension of direct military engagement between Russia and Ukraine, which is officially announced by both countries or confirmed by a consensus of credible reporting to have been mutually ag",russia-x-ukraine-ceasefire-by-december-31-2026,1012692.3394120001,141027.0289,2026-05-16T01:25:40.912938Z,2026-12-31T21:59:00Z,0.105,0.895,,"['Yes', 'No']","['0.105', '0.895']","['[""51308444364217538450493615474295421156909090806486317984535574801660314569304""', '""74076568846866714142503847026760702713555643778038790220454009063912340064073""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337389+00:00,2106193,Will UAE leave the Gulf Cooperation Council  in 2026?,"This market will resolve to ""Yes"" if the UAE officially announces or formally communicates its decision to withdraw from the Gulf Cooperation Council (GCC) between market creation and the specified date, 11:59 PM Gulf Standard Time. Otherwise, this market will resolve to ""No"".
+
+An official announcement or formal communication refers to a statement by the United Arab Emirates government or an entity officially authorized to make such a decision that clearly indicates its decision to withdraw from",will-uae-leave-the-gulf-cooperation-council-in-2026,101278.789656,18957.30138,2026-04-28T20:21:37.852Z,2026-12-31T19:59:00Z,0.0345,0.9655,,"['Yes', 'No']","['0.0345', '0.9655']","['[""10758490048299627223884174468030972063023010298182969009186510661987414818490""', '""79511288995111009605193688033869924358122905241995756429255377513755310904450""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337399+00:00,950123,"Trump, Putin, and Zelensky seen together before 2027?","This market will resolve to ""Yes"" if Donald Trump, Vladimir Putin, and Volodymyr Zelensky are photographed or videotaped together, in the same frame, between this market's creation and December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to ""No"".
+
+For this market to resolve to ""Yes,"" the images or video must be taken and released within this market's timeframe. The images or video must be authentic, not the result of artificial intelligence or video editing.
+
+The resolution source",trump-putin-and-zelensky-seen-together-before-2027,101310.748063,19251.843,2025-12-16T19:37:20.829683Z,2027-01-01T04:59:00Z,0.07,0.93,,"['Yes', 'No']","['0.07', '0.93']","['[""39670098516219763859565081669216272149787587590849992425558371919361939205373""', '""109491250341571675806293993648463351146069924381619147425735651822167557652590""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337411+00:00,2364958,Will Trump and Putin meet next in United States?,"This market will resolve according to the location of the next meeting between Donald Trump and Vladimir Putin between market creation and December 31, 2026, 11:59 PM ET.
+
+This market will resolve to ""No meeting by December 31"" if no qualifying meeting occurs during this market's timeframe.
+
+A meeting is defined as any encounter where Putin and Trump are all present and interact with each other in person.
+
+An exchange of words, handshake, direct conversation, or other clear personal interaction ",will-trump-and-putin-meet-next-in-united-states,101504.26712399998,28275.50054,2026-05-26T22:51:24.390208Z,2027-01-01T04:59:00Z,0.036,0.964,,"['Yes', 'No']","['0.036', '0.964']","['[""86355179960593712403904097543442605251256617995112499118383686460760153402098""', '""21824273397941257218777902214888231352336233970494486870303088815991150175157""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337426+00:00,3081922,Will Rafael López Aliaga win the next Lima mayoral elections?,"The 2026 Lima, Peru mayoral election is currently scheduled to be held on October 4, 2026.
+
+This market will resolve according to the candidate who becomes the next Mayor of Lima as a result of this election.
+
+Temporary, interim, or placeholder mayors appointed before the election will not be considered.
+
+If the result of this election isn't known by June 30, 2027, 11:59 PM ET, the market will resolve to ""Other"".
+
+The primary resolution source for this market will be a consensus of credible repo",will-rafael-lopez-aliaga-win-the-next-lima-mayoral-elections,101600.77912399996,30063.82647,2026-07-24T15:58:24.101882Z,2026-10-05T03:59:00Z,0.933,0.067,,"['Yes', 'No']","['0.933', '0.067']","['[""54368828343592852948117971430187932280601261841531931629384057672409667011435""', '""20272849546355973548527692448950091115304083436268297757869637710733360217239""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337447+00:00,1892496,Will New York Liberty win the 2026 WNBA Finals?,"This market will resolve to ""Yes"" if the listed team is determined as the champion of the WNBA for the 2026 season. Otherwise, it will resolve to ""No"".
+
+If at any point it becomes impossible for a listed participant to named as the champion of WNBA for the 2026 season per the rules of WNBA (e.g., participant is eliminated), the corresponding market will resolve to ""No"".
+
+If multiple teams are declared winners, this market will resolve in favor of the team whose listed name comes first alphabetic",will-new-york-liberty-win-the-2026-wnba-finals-453,101617.74955600001,17215.88251,2026-04-06T16:31:58.548Z,2026-10-31T00:00:00Z,0.1775,0.8225,,"['Yes', 'No']","['0.1775', '0.8225']","['[""65804899842033402070837410233273894470471489868643910414499790630615593417064""', '""49805075669052829550914753888754603979914842571698457768573573277398903743714""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337459+00:00,1281140,Will the Republican Party win the CA-31 House seat?,"This market will resolve according to the party of the candidate who wins the CA-31 congressional district seat in the U.S. House of Representatives in the 2026 midterm elections. The midterm elections will take place on November 3, 2026.
+
+​A candidate's party will be determined by their ballot-listed or otherwise identifiable affiliation with that party at the time all of the 2026 House elections are conclusively called by this market's resolution sources. A candidate without a ballot-listed af",will-the-republican-party-win-the-ca-31-house-seat,10180.922634999999,73950.93854,2026-01-28T06:30:02.60535Z,2026-11-04T04:59:00Z,0.0405,0.9595,,"['Yes', 'No']","['0.0405', '0.9595']","['[""69984158746062542080223167170976615205165058910211891248581092914202168455466""', '""16330897449234361712088257145852587335609788931688443182505284072219997776459""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337470+00:00,1367023,Will Clavicular be named People's Sexiest Man Alive in 2026?,"This market will resolve according to the name of the person who is named People Magazine's Sexiest Man Alive.
+
+If more than one person is named Sexiest Man Alive by People Magazine, this market will resolve in favor of the person whose name comes first in alphabetical order.
+
+If no Sexiest Man Alive is announced for 2026 by December 31, 2026, 11:59PM ET, this market will resolve to ""Other"". 
+
+The resolution source for this market will be People (https://people.com/) or a consensus of credible r",will-clavicular-be-named-peoples-sexiest-man-alive-in-2026-399,101818.49288099998,1281.69121,2026-02-11T23:13:08.875614Z,2027-01-01T04:59:00Z,0.028,0.972,,"['Yes', 'No']","['0.028', '0.972']","['[""45192403302189095705690124053194394317106648523509681372554623453292460725314""', '""54759270142355251809038827208971850462858302884317394581158455688182901746447""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337481+00:00,1068762,"Will USDC hit 50% of USDT market cap by December 31, 2026?","This market will immediately resolve to ""Yes"" if the USDC marketcap is equal to or greater than 50% of USDT marketcap on any day by December 31, 2026. Otherwise, this market will resolve to ""No.""
+
+This market will resolve based on CoinGecko's ""historical data"" section for each coin, currently available at https://www.coingecko.com/en/coins/usd-coin/historical_data#panel and https://www.coingecko.com/en/coins/tether/historical_data#panel respectively, specifically the daily ""Market Cap"" data.
+
+Th",will-usdc-hit-50-of-usdt-market-cap-by-december-31-2026,101848.78362300001,222.6025,2025-12-30T22:05:20.395Z,2027-01-01T05:00:00Z,0.265,0.735,,"['Yes', 'No']","['0.265', '0.735']","['[""92063509161371023588356720867210063473058158748167650409901048666263049686317""', '""51639815615464253806811879048250527088947940655978278010959957844379210492399""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337492+00:00,5170746,"Will Bitcoin dip to $60,000 in October?","This market will immediately resolve to ""Yes"" if any Binance 1 minute candle for BTC/USDT during the month specified in the title (from 00:00 AM ET on the first day to 11:59 PM ET on the last), has a final Low price equal to or lower than the price specified in the title. Otherwise, this market will resolve to ""No.""
+
+The resolution source for this market is Binance, specifically the BTC/USDT Low prices available at https://www.binance.com/en/trade/BTC_USDT, with the chart settings on ""1m"" for on",will-bitcoin-dip-to-60k-in-october-2026,101926.33229599998,76662.12685,2026-10-01T05:07:13Z,2026-11-01T04:00:00Z,0.017,0.983,,"['Yes', 'No']","['0.017', '0.983']","['[""52507650534625211175468518711377195799260905304050333642717927544269620531550""', '""45784545548351515061978444727578635114761223599653661659259108920855009922279""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337504+00:00,2750641,NBA: LeBron James and Bronny James Jr. to Play Together in 2026-27?,"This market will resolve to “Yes” if LeBron James and Bronny James Jr. join the same NBA roster by the first day of the 2026-27 NBA regular season. Otherwise, this market will resolve to “No”.
+If both players are on the same franchise's roster, including via two-way contract, this market will resolve to ""Yes"". Players assigned to the G-League under a two-way contract will count, provided both players are under contract with the same franchise. Players signed exclusively to a G-League contract (n",nba-lebron-james-and-bronny-james-jrpt-to-play-together-in-2026-27-20260630182039143,101971.901014,5374.06706,2026-07-01T03:44:21.577597Z,2026-11-01T03:59:00Z,0.011,0.989,,"['Yes', 'No']","['0.011', '0.989']","['[""65217747391065610498524733774851088724368138706140421186161031837402714127802""', '""9307055019151700988210350838361175954716395371534177005538894375868925205394""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337516+00:00,1560264,Will Solana hit $60 or $140 first?,"This market will resolve to the lower price in the title if Solana’s price dips to that level or below before it hits the higher title price between the creation of this market and December 31, 2026 at 11:59 PM ET. It will resolve to the higher price in the title if Solana’s price first reaches that level or above before it dips to the lower title price during the same period.
+
+If neither price level is reached within the market timeframe, the market will resolve 50–50.
+
+The resolution source fo",will-solana-hit-60-or-140-first,101994.16181300001,8210.07741,2026-03-11T18:06:09.808331Z,2027-01-01T05:00:00Z,0.232,0.768,,"['$60', '$140']","['0.232', '0.768']","['[""78254282949143986853268294766480111725541872065773296430991085010029163642355""', '""69490264781632452227277226406822968328725178318776894209893578288422652850796""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337531+00:00,2324607,Will Oura's market cap be between $12.5B and $15B at market close on IPO day?,"This market will resolve based on Oura's market capitalization at the closing price on its first day of trading.
+
+If no IPO occurs by December 31, 2026, 11:59 PM ET, the market will resolve to ""No IPO before January 2027"".
+
+Market capitalization expresses the monetary value of a company’s outstanding shares, stated in its pricing currency. It is calculated as the number of shares outstanding multiplied by the closing share price on the first trading day.
+
+If the relevant value falls exactly betw",will-ouras-market-cap-be-between-12pt5b-and-15b-at-market-close-on-ipo-day,102023.03464899998,8518.11992,2026-05-26T16:31:44.966243Z,2027-01-01T04:59:00Z,0.0185,0.9815,,"['Yes', 'No']","['0.0185', '0.9815']","['[""71966323859810278641813622233610176426388643026623740807543702968778909632529""', '""82571398347935523297848092624063820199585494219824584618187885960290557041932""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337542+00:00,1131458,Will SpaceX have between 160-179 launches in 2026?,"This market will resolve according to the number of SpaceX launches between January 1, 2026, 12:00AM ET and December 31, 2026, 11:59PM ET.
+
+If the reported total number of SpaceX launches falls exactly between two brackets, then this market will resolve to the higher range bracket.
+
+The resolution source for this market will be https://www.spacex.com/launches.",will-spacex-have-between-160-179-launches-in-2026,102049.90666000001,2845.49357,2026-01-16T17:48:38.384734Z,2027-01-01T04:59:00Z,0.0255,0.9745,,"['Yes', 'No']","['0.0255', '0.9745']","['[""69826026005263355791425284322893800911642558267675813558550985614142116150029""', '""37343752585295316543019533314101099471191293547691709213678687704445204092180""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337562+00:00,1131150,"Will the Doge-1 Lunar Mission launch by December 31, 2026?","If the Doge-1 12U Lunar Cube satellite successfully launches from its launch pad by December 31, 2026, 11:59 PM ET, this market will resolve to “Yes”. Otherwise, this market will resolve to “No.”
+
+The outcome of any launch will be corroborated by examining official video provided by SpaceX (https://www.youtube.com/c/SpaceX), as well as secondary video feeds and/or written reports if necessary.
+
+Any subsequent anomaly (e.g., an explosion) after the launch will have no bearing on the outcome. Any ",will-the-doge-1-lunar-mission-launch-before-2027,1023642.6656139997,50804.47389,2026-01-07T23:09:00.166576Z,2027-01-01T04:59:00Z,0.0385,0.9615,,"['Yes', 'No']","['0.0385', '0.9615']","['[""24532244971331469081136591021496807808109838335579455403786547950699236092433""', '""20115696851573188378191998818216679952228452617151380017697522622149021390888""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337574+00:00,5259365,Braga: Rafael Izquierdo Luque vs Benjamin Hassan,"This market refers to the tennis match between Rafael Izquierdo Luque and Benjamin Hassan in the Braga, Portugal, Qualifying, originally scheduled for October 4, 2026 at 8:00AM ET.
+
+This market will resolve to 'Rafael Izquierdo Luque' if Rafael Izquierdo Luque advances against Benjamin Hassan.
+
+This market will resolve to 'Benjamin Hassan' if Benjamin Hassan advances against Rafael Izquierdo Luque.
+
+If the match is canceled (not played at all), ends in a tie, or a winner has not been determined ",atp-luque-hassan-2026-10-04,1024.8881880000001,249527.7084,2026-10-03T23:08:12Z,2026-10-11T12:00:00Z,0.055,0.945,,"['Rafael Izquierdo Luque', 'Benjamin Hassan']","['0.055', '0.945']","['[""6328391336232256704666880808088845705998832018109566522654328816576562281064""', '""5128989378142075857777119432930892361130134037117914405837692657368028585121""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337585+00:00,2468459,"Will Ethereum dip to $700 by December 31, 2026?","This market will resolve to ""Yes"" if any Binance 1 minute candle for Ethereum (ETH/USDT) between the creation of this market through 11:59 PM ET on the last day of the year specified in the title has a final “Low” price equal to or lower than the price specified in the title. Otherwise, this market will resolve to ""No"". Price action before this market's creation will not be considered.
+
+The resolution source for this market is Binance, specifically the ETH/USDT “Low” prices available at https://",will-ethereum-dip-to-700-by-december-31-2026-from-june-8,10269.104265,79491.98469,2026-06-08T05:28:17.830094Z,2027-01-01T05:00:00Z,0.0215,0.9785,,"['Yes', 'No']","['0.0215', '0.9785']","['[""103092737484603666358050491249189587083708561366956414936640634640728748591705""', '""5265533372691957648358160133402780441340317465614228132327086628582334990917""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337607+00:00,5260900,Spread: Los Angeles Dodgers (-1.5),"In the upcoming MLB game between the Atlanta Braves and Los Angeles Dodgers, scheduled for October 4 at 8:00 PM ET:
+
+This market will resolve to ""Los Angeles Dodgers"" if the Los Angeles Dodgers win the game by 2 or more runs.
+
+Otherwise, this market will resolve to ""Atlanta Braves"". If the game ends in a tie, this market will resolve to ""Atlanta Braves"".
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up ga",mlb-atl-lad-2026-10-04-spread-home-1pt5,10289.081966,141672.7007,2026-10-03T23:28:27Z,2026-10-05T00:00:00Z,0.385,0.615,,"['Los Angeles Dodgers', 'Atlanta Braves']","['0.385', '0.615']","['[""10483236714167243375478730398091113749641857843243382027725501509965546980300""', '""93516518240261489092895516083265727517411624733478341558193001880080704562730""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337620+00:00,2168343,Will the next Prime Minister of Romania be an Independent or a Technocrat?,"This market will resolve to the political party of the next officially appointed and confirmed Prime Minister of Romania by December 31, 2027, 11:59 PM ET.
+
+To count for resolution, the Prime Minister must be both formally appointed by the President of Romania and receive a vote of confidence from Parliament, resulting in the official formation of a new government. Any interim or caretaker Prime Minister who does not receive a parliamentary vote of confidence will not count toward the resolution",will-the-next-prime-minister-of-romania-be-an-independent-or-a-technocrat,102955.025912,26366.8109,2026-05-11T13:04:56.897Z,2028-01-01T04:59:00Z,0.685,0.315,,"['Yes', 'No']","['0.685', '0.315']","['[""73513086048786470371531362803520607559667464794683066736303366721260367328578""', '""28959124003801240402838896725961882435679043902699122388961378900170916703591""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337631+00:00,678416,Will Avengers: Doomsday be the top grossing movie of 2026?,"This market will resolve according to the title of the film with the highest 2026 gross according to the ""Gross"" column on https://www.boxofficemojo.com/year/2026/?grossesOption=calendarGrosses once data for December 31 is made available. 
+
+Note: This market is about the movie's domestic calendar gross in 2026 - dates outside of 2026 will not count toward this movie's gross.
+
+In the event of an exact tie the film that comes first alphabetically will be considered the winner.
+
+If there is no fina",will-avengers-doomsday-be-the-top-grossing-movie-of-2026,1031643.7537019996,115666.63213,2025-11-12T16:58:12.551784Z,2027-01-08T04:59:00Z,0.0455,0.9545,,"['Yes', 'No']","['0.0455', '0.9545']","['[""89576274136595202327975910079635847102293810595609428633134997662847357374694""', '""95857328899006698426560952919509163544152315663112942013127648104914930931076""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337642+00:00,1820798,Will a Chinese company have the best AI model by December 31?,"This market will resolve to ""Yes"" if a Chinese company owns a model that ranks first, based on the Chatbot Arena LLM Leaderboard (https://arena.ai/) when the table under the ""Leaderboard"" tab is checked at any point between market creation and December 31, 2026, 11:59 PM ET.
+
+Results from the ""Rank"" section under the ""Text Arena | Overall"" Leaderboard tab at https://arena.ai/leaderboard/text/overall-no-style-control with style control off will be used to resolve this market.
+
+Chinese Companies i",will-a-chinese-company-have-the-best-ai-model-by-december-31,103235.82771599999,16991.1503,2026-04-02T21:57:52.592Z,2027-01-01T04:59:00Z,0.075,0.925,,"['Yes', 'No']","['0.075', '0.925']","['[""75208882562061736657939023955710826509085710699626885913084554436160797786348""', '""96397436209982671453637902269275725071267861171129419695794443407952680636718""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337654+00:00,1469751,Will Masoud Pezeshkian be head of state in Iran end of 2026?,"This market will resolve to the individual who de facto holds and exercises the powers of the head of state of the Islamic Republic of Iran on December 31, 2026 at 12:00 PM ET.
+
+For the purposes of this market, “de facto holds” refers to the individual who exercises primary governing authority over the Iranian state at that time, including effective control over the armed forces, national institutions, and core executive decision-making, regardless of formal title, constitutional designation, or",will-masoud-pezeshkian-be-head-of-state-in-iran-end-of-2026,1032383.071278,67534.81161,2026-03-01T00:16:54.486664Z,2026-12-31T17:00:00Z,0.004,0.996,,"['Yes', 'No']","['0.004', '0.996']","['[""28152633830811377282265546570547229637532772761293435321097240605763179025584""', '""97236288492373150716566927783809309998849767646752497906664649666572786591076""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337668+00:00,1544795,Alexandre de Moraes out as Brazil Supreme Court Justice?,"This market will resolve to “Yes” if Alexandre de Moraes ceases to be a Justice of Brazil’s Supreme Federal Court for any period of time between market creation and December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to “No”.
+
+An announcement of Alexandre de Moraes's resignation/removal before this market's end date will immediately resolve this market to ""Yes"", regardless of when the announced resignation/removal goes into effect.
+
+The resolution source for this market will be o",alexandre-de-moraes-out-as-brazil-supreme-court-justice,103314.23598900001,14266.0697,2026-03-09T22:23:53.696503Z,2027-01-01T04:59:00Z,0.245,0.755,,"['Yes', 'No']","['0.245', '0.755']","['[""99390970186095476158604553843389938788064583141526825109668507201084266675707""', '""93122438536925935188880566476461688212958683487744885859121531683628531023751""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337702+00:00,3685385,"Will there be no next Google Gemini Pro model release by November 1, 2026?","This market will resolve according to the calendar date (ET) on which Google's next Gemini Pro model is made available to the general public.
+
+Any Gemini model released after market creation and labeled as ""Pro"" may qualify (e.g., gemini-3.2-pro, gemini-3.5-pro, or gemini-4.0-pro-preview). Gemini models labeled only as Flash, Flash-Lite, or another non-Pro variant will not qualify.
+
+Products labeled as a GA promotion of an already-existing Preview model (e.g., gemini-3.1-pro-ga) may qualify.
+
+A ",will-there-be-no-next-google-gemini-pro-model-release-by-november-1-2026,103440.950792,5290.4318,2026-08-17T23:32:37Z,2026-11-01T23:59:00Z,0.745,0.255,,"['Yes', 'No']","['0.745', '0.255']","['[""41613658196723695449189833265179592193122678915806434059994038196882828529689""', '""15537468557576571719888630287255694159975391584949794870288041067460092451334""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337725+00:00,2243313,Will Golden State Warriors win the 2027 NBA Finals?,"This market will resolve to ""Yes"" if the listed team is determined as the champion of the NBA for the 2026-27 season. Otherwise, it will resolve to ""No"".
+
+If at any point it becomes impossible for a listed team to be named as the champion of NBA for the 2026-27 season per the rules of NBA (e.g., participant is eliminated), the corresponding market will resolve to ""No"".
+
+If multiple teams are declared winners, this market will resolve in favor of the team whose listed name comes first alphabetica",will-golden-state-warriors-win-the-2027-nba-finals,1034482.797333,259283.94905,2026-05-13T20:09:36.237473Z,2027-07-01T03:59:00Z,0.0105,0.9895,,"['Yes', 'No']","['0.0105', '0.9895']","['[""50057479075318947359707260741622203277536030001654353875522545719934423335906""', '""72545620904820284070298803813423121046478207881047910355600526853551100136505""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337816+00:00,4177246,Will Artificial Inu be the first to hit a $1B FDV?,"This market will resolve to ""Yes"" if Artificial Inu (AI) is the first of the coins listed below to reach a fully diluted valuation equal to or greater than $1,000,000,000 at any point between the creation of this market and December 25, 2026, 11:59 PM ET. Otherwise, this market will resolve to ""No"".
+
+Fully diluted valuation refers to the figure published by each coin's resolution source, shown as ""Fully Diluted Valuation"" on CoinGecko and as ""FDV"" on CoinMarketCap. Circulating supply market cap ",will-artificial-inu-be-the-first-to-hit-a-1b-fdv,103522.68301699999,62286.7563,2026-09-02T23:21:55Z,2026-12-26T04:59:00Z,0.115,0.885,,"['Yes', 'No']","['0.115', '0.885']","['[""41881813710089727854405675208080554765410855994744600957959857571752815444932""', '""92616953988724138680103253086724028086219696823423127908595769947668027234846""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337933+00:00,5062327,"Will Ethereum dip to $2,600 September 28-October 4?","This market will immediately resolve to ""Yes"" if any Binance 1 minute candle for Ethereum (ETH/USDT) during the date range specified in the title (from 12:00 AM ET on the first date to 11:59 PM ET on the last) has a final ""Low"" price equal to or lower than the price specified in the title. Otherwise, this market will resolve to ""No.""
+
+The resolution source for this market is Binance, specifically the ETH/USDT ""Low"" prices available at https://www.binance.com/en/trade/ETH_USDT, with the chart set",will-ethereum-dip-to-2600-september-28-october-4-2026,103564.25476199997,28269.72902,2026-09-28T04:00:18Z,2026-10-05T04:00:00Z,0.016,0.984,,"['Yes', 'No']","['0.016', '0.984']","['[""47676763541869158299713169277432526767391534821408962266016065873978722104857""', '""29408104438480167536946991995908313007300358637315072408117802744792186151450""]']",True,0
+2026-10-04,2026-10-04T13:11:35.337971+00:00,5126793,"Will Missouri enact a data center moratorium by December 31, 2027?","This market will resolve to ""Yes"" if the State of Missouri enacts a law or constitutional provision that establishes a statewide moratorium on new data centers between market creation and the specified date, 11:59 PM ET. Otherwise, this market will resolve to ""No"".
+
+A statewide moratorium on new data centers refers to a binding policy with legal force that generally prohibits or suspends the approval, permitting, construction, grid interconnection, or operation of all new data centers, or a subs",will-missouri-enact-a-data-center-moratorium-by-december-31-2027,103574.99899200001,119761.7913,2026-09-29T15:58:02Z,2028-01-01T04:59:00Z,0.145,0.855,,"['Yes', 'No']","['0.145', '0.855']","['[""7452686474791804844828113859675630880260841186582752326279968660605209282618""', '""81775677715327042291293633343231534290799381845465124459618121288741919819810""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338027+00:00,1106059,Over $1B raised on Coinbase in 2026?,"This market will resolve to “Yes” if the total amount raised by Coinbase token sales in 2026 exceeds the number specified in the title. Otherwise, it will resolve to “No.”
+
+The resolution source will be official information published by Coinbase, the respective Coinbase token sale pages, or official communications from projects raising on Coinbase.",over-1b-raised-on-coinbase-in-2026,103588.98774299998,48.8524,2026-01-05T17:39:32.523715Z,2027-01-01T05:00:00Z,0.11,0.89,,"['Yes', 'No']","['0.11', '0.89']","['[""80786178240271117262906213519018908283409389425271913717015622156764405414662""', '""292356585785069271448167426642918841275342230674485437633795048940998287257""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338061+00:00,568116,"Will Trump be impeached by December 31, 2026?","This market will resolve to “Yes“ if the US House of Representatives by simple majority vote to approve or pass one or more articles of impeachment of President Donald Trump, between July 24, 2025, and December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to ""No"".
+
+Neither trial nor conviction by the US Senate, nor removal from office, is necessary to resolve this market to “Yes“.
+
+The primary resolution source for this market will be information from the federal government of the ",will-trump-be-impeached-by-december-31-2026,1037992.341455,101449.29533,2025-07-25T18:48:03.678Z,2027-01-01T04:59:00Z,0.0225,0.9775,,"['Yes', 'No']","['0.0225', '0.9775']","['[""22094182676612877581056034720566110371610082057092726094559729674155018648896""', '""78473141615408645278260621827323903204731180016962666262959632385172645644801""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338102+00:00,1349143,Will Atlanta United FC win the 2026 MLS Cup?,"This market will resolve according to the team that wins the 2026 MLS Cup. 
+
+If at any point it becomes impossible for a listed team to win the 2026 MLS Cup per the rules of MLS (e.g. they are mathematically eliminated), the corresponding market will resolve to “No”.
+
+If the 2026 MLS season is cancelled, postponed after December 31, 2026 ET, or there is otherwise no winner declared within that timeframe, this market will resolve to “Other”.
+
+The primary resolution source will be official informa",will-atlanta-united-fc-win-the-2026-mls-cup,103845.09643500001,31938.94347,2026-02-17T23:30:07.908235Z,2027-01-01T04:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""98860253812823050063139637560732946426096668703679673601434971154563134664716""', '""37277864974493024577055646517486369679989000172963448781524519316902530886432""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338135+00:00,678782,Will the US strike 13 countries in 2026?,"This market will resolve according to the total number of different countries' soil that the United States initiates a drone, missile, or air strike on between January 1, 2026, 12:00 AM ET and December 31, 2026, 11:59 PM ET.
+
+Strikes on embassies or consulates will count towards the country the embassy or consulate is located in, not towards the country they represent.
+
+Strikes within the territory controlled by the United States as of December 31, 2025, 11:59 PM ET will not be counted towards t",will-the-us-strike-13-countries-in-2026,103856.40714699998,15247.17443,2025-11-13T16:18:47.063982Z,2027-01-01T04:59:00Z,0.005,0.995,,"['Yes', 'No']","['0.005', '0.995']","['[""13077482279920101207310968124602583673569984432172021504617728683823467712777""', '""901212246213038162179842853705748230868715620940241462625314496008720646944""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338220+00:00,4620250,"Iran full airspace closure by October 31, 2026?","This market will resolve to “Yes” if Iran initiates a general closure of its airspace, that is not solely due to weather conditions, between market creation and the specified date, 11:59 PM ET. Otherwise, this market will resolve to “No”.
+
+A “general closure” refers to a cancellation or suspension of aviation which is generally applicable to all commercial flights transiting Iranian airspace (“Tehran FIR”). A qualifying closure must apply generally to all of Iran or the Tehran FIR; limited cance",iran-full-airspace-closure-by-october-31-2026-copy,103890.012981,14437.2685,2026-09-16T17:53:38Z,2026-11-01T03:59:00Z,0.07,0.93,,"['Yes', 'No']","['0.07', '0.93']","['[""12986041958032490956100187529369728708256259581035618976714497828677868886315""', '""98282689049673050962334818467743727614818971377812348096485339058203693156854""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338251+00:00,1349170,Will St. Louis City SC win the 2026 MLS Cup?,"This market will resolve according to the team that wins the 2026 MLS Cup. 
+
+If at any point it becomes impossible for a listed team to win the 2026 MLS Cup per the rules of MLS (e.g. they are mathematically eliminated), the corresponding market will resolve to “No”.
+
+If the 2026 MLS season is cancelled, postponed after December 31, 2026 ET, or there is otherwise no winner declared within that timeframe, this market will resolve to “Other”.
+
+The primary resolution source will be official informa",will-st-louis-city-sc-win-the-2026-mls-cup,103898.63127499999,21720.67685,2026-02-17T23:33:23.940681Z,2027-01-01T04:59:00Z,0.067,0.933,,"['Yes', 'No']","['0.067', '0.933']","['[""38753905059001915768997367469589111334649639704457897535405621683687306202320""', '""53384225333392383902803409866800818816024950359405346713806516543997495180325""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338279+00:00,5170729,"Will Bitcoin reach $102,500 in October?","This market will immediately resolve to ""Yes"" if any Binance 1 minute candle for BTC/USDT during the month specified in the title (from 00:00 AM ET on the first day to 11:59 PM ET on the last), has a final High price equal to or greater than the price specified in the title. Otherwise, this market will resolve to ""No.""
+
+The resolution source for this market is Binance, specifically the BTC/USDT High prices available at https://www.binance.com/en/trade/BTC_USDT, with the chart settings on ""1m"" fo",will-bitcoin-reach-102pt5k-in-october-2026,103902.68248299998,80843.9769,2026-10-01T05:07:11Z,2026-11-01T04:00:00Z,0.065,0.935,,"['Yes', 'No']","['0.065', '0.935']","['[""17914254906987821103954724968898702177477465264491908783238145921759658492433""', '""69803892323569212331339178782090870657755055854700360280671150999977056591804""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338309+00:00,561264,Will Pete Hegseth win the 2028 US Presidential Election?,"The 2028 US Presidential Election is scheduled to take place on November 7, 2028.
+
+This market will resolve to the person who wins the 2028 US Presidential Election.
+
+The resolution source for this market is the Associated Press, Fox News, and NBC. This market will resolve once all three sources call the race for the same candidate. If all three sources haven’t called the race for the same candidate by the inauguration date (January 20, 2029) this market will resolve based on who is inaugurated.",will-pete-hegseth-win-the-2028-us-presidential-election,10393231.836485999,1305873.57172,2025-07-11T19:06:22.785Z,2028-11-08T04:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""19127703543758281171764934244436807153695715307017908811054254126168591609122""', '""55988424779505974483153818818889528404380009581145395352086864710928569072171""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338344+00:00,916715,Will less than 5 SpaceX Starship launches successfully reach Space in 2026?,"This market will resolve according to the number of SpaceX Starship launches successfully reaching an altitude of 62 miles above sea level between January 1, 2026, and December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to ""No"".
+
+A successful launch is defined as the Starship taking off from its launchpad and reaching a minimum altitude of 62 miles above sea level. Any subsequent anomaly (e.g., an explosion) after the vehicle reaches 62 miles will have no bearing on the outcome.
+",will-less-than-5-spacex-starship-launches-successfully-reach-space-in-2026,103959.59075999999,1342.7725,2025-12-12T00:45:25.444421Z,2027-01-01T04:59:00Z,0.36,0.64,,"['Yes', 'No']","['0.36', '0.64']","['[""36062429679865523787623068309302905887961488865948110723876152708058004555549""', '""108274249976865200285399055028180907021395947249491255471470364491925454297602""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338371+00:00,561270,Will Josh Stein win the 2028 US Presidential Election?,"The 2028 US Presidential Election is scheduled to take place on November 7, 2028.
+
+This market will resolve to the person who wins the 2028 US Presidential Election.
+
+The resolution source for this market is the Associated Press, Fox News, and NBC. This market will resolve once all three sources call the race for the same candidate. If all three sources haven’t called the race for the same candidate by the inauguration date (January 20, 2029) this market will resolve based on who is inaugurated.",will-josh-stein-win-the-2028-us-presidential-election,1040145.764,2023958.50876,2025-07-11T19:06:31.115Z,2028-11-08T04:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""81914651028896069221591777664987513664858213907907450367169656205040430609207""', '""65690056973061661242675346311703362078774633474188031871609738459615961194811""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338403+00:00,601822,Will Michelle Bolsonaro win the 2026 Brazilian presidential election?,"A presidential election is scheduled to take place in Brazil on October 4, 2026.
+
+This market will resolve according to the listed candidate that wins this election.
+
+This market includes any potential second round. If the result of this election isn't known by June 30, 2027, 11:59 PM ET, the market will resolve to ""Other"".
+
+This market will resolve based on the result of the election as indicated by a consensus of credible reporting. If there is ambiguity, this market will resolve based solely ",will-michelle-bolsonaro-win-the-2026-brazilian-presidential-election,10417996.912317999,1750721.88329,2025-09-18T20:08:01.863387Z,2026-10-05T03:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""91154058715822908897619103072380844452822017332608583147987152526225529443892""', '""16879668974983992641795221456967869661599530861479349066809692639705609051027""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338419+00:00,1365893,Will Carlos Roberto Massa Júnior finish in third place in the first round of the 2026 Brazilian presidential election?,"A presidential election is scheduled to take place in Brazil on October 4, 2026.
+
+This market will resolve according to the listed candidate who receives the third-most valid votes in the first round of this election.
+
+The named candidates will be primarily ranked by the number of valid votes received in the specified election. If two or more candidates are tied on valid votes, ties will be broken by alphabetical order of the candidates' last names. This market will resolve to the candidate that",will-carlos-roberto-massa-jnior-finish-in-third-place-in-the-first-round-of-the-2026-brazilian-presidential-election,104207.77221499998,70070.5949,2026-02-11T22:46:14.759967Z,2026-10-05T03:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""98279737312722721984464036473219944696451907001028596656918791113590571774639""', '""45585873794901662369450370420845277891361850736411421687270432964410373480557""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338432+00:00,2747387,Iran coup attempt by December 31?,"This market will resolve to ""Yes"" if there is a widely reported coup attempt in Iran at any point between market creation and December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to ""No.""
+
+A coup attempt is defined as a coordinated and deliberate effort by military, security forces, or other state actors (or factions thereof) to overthrow or unlawfully seize control of the Iranian government or its leadership. Revolutionary actions by non-state forces, isolated protests, or genera",iran-coup-attempt-by-december-31,104247.34415500001,19676.015,2026-06-30T21:15:10.395257Z,2027-01-01T04:59:00Z,0.095,0.905,,"['Yes', 'No']","['0.095', '0.905']","['[""6864952799809055467898809005599649311761793957871577112130233791737369470118""', '""14107562303432439816194957141245833437639569489899066998028155502329023491539""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338456+00:00,656312,Will OpenAI IPO by December 31 2026?,"This market will resolve to ""Yes"" if OpenAI completes an Initial Public Offering (IPO) by the listed date ET, as confirmed by official company announcements and credible news sources. Otherwise, this market will resolve to ""No"".
+
+The IPO refers to the first sale of stock by the listed company to the public on any recognized stock exchange.
+
+If OpenAI is acquired by another company that is already public, this market will immediately resolve to ""No.""
+
+The resolution source for this market is a co",will-openai-ipo-by-december-31-2026,1042995.8322230004,23812.17627,2025-10-30T00:29:28.969Z,2027-01-01T04:59:00Z,0.0375,0.9625,,"['Yes', 'No']","['0.0375', '0.9625']","['[""78959017184382580042532738046363918551357602274462396865643365060706535362447""', '""10592971839058012204379818734015951513876214421642216097933518020153836601713""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338467+00:00,3919597,Patriots vs. Bills: O/U 57.5,"In the upcoming NFL game, scheduled for October 4 at 1:00 PM ET:
+
+This market will resolve to ""Over"" if the Patriots and Bills combine to score 58 or more points in this game.
+
+If the combined total is less than 58, this market will resolve to ""Under"".
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50-50.",nfl-ne-buf-2026-10-04-total-57pt5,104353.841797,52847.8351,2026-08-27T00:30:49Z,2026-10-04T17:00:00Z,0.275,0.725,,"['Over', 'Under']","['0.275', '0.725']","['[""52220370877321464565532688691861283709746272908004992914149375116213708966772""', '""31684778499773601353758000200945991233339247795121238223016270095136422273625""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338477+00:00,4861479,Spread: Ravens (-13.5),"In the upcoming NFL football game between Titans and Ravens, scheduled for October 4 at 1:00 PM ET:
+
+This market will resolve to ""Ravens"" if the Ravens win the game by 14 or more points.
+
+Otherwise, this market will resolve to ""Titans"".
+
+Overtime is included if played.
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50-50.",nfl-ten-bal-2026-10-04-spread-home-13pt5,10436.782009999999,192000.0489,2026-09-22T21:16:13Z,2026-10-04T17:00:00Z,0.445,0.555,,"['Ravens', 'Titans']","['0.445', '0.555']","['[""15231028494220103099967581027254071153482294809919658988178834974599079625481""', '""37551444736346377484677248623130833584321932674066098550820141317205282570197""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338488+00:00,4786386,Exact Score: Wales 0 - 0 Denmark?,"In the upcoming UEFA Nations League game between Wales and Denmark, scheduled for October 4, 2026 at 2:45 PM ET: This market will resolve based on the final score of the Wales vs. Denmark match originally scheduled for October 4, 2026 at 2:45 PM ET, considering only the result at the end of 90 minutes of regulation plus stoppage time; extra time and penalty shoot-outs are excluded. If the actual score is not one of the explicitly listed outcomes, the market resolves to ""Any Other Score."" If the ",unl-wal-den-2026-10-04-exact-score-0-0,104.55695599999999,99614.15691,2026-09-21T10:02:15Z,2026-10-04T18:45:00Z,0.067,0.933,,"['Yes', 'No']","['0.067', '0.933']","['[""89588592805959042574806098743348941721677100611935253139062061200162967692222""', '""31024795543253340779531276727349549635983301244144301354987942065000365241234""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338498+00:00,3875305,Spread: Bills (-7.5),"In the upcoming NFL game, scheduled for October 4 at 1:00 PM ET:
+
+This market will resolve to ""Bills"" if the Bills win the game by 8 or more points.
+
+Otherwise, this market will resolve to ""Patriots"". If the game ends in a tie, this market will resolve to ""Patriots"".
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50-50.",nfl-ne-buf-2026-10-04-spread-home-7pt5,104589.673473,411013.0523,2026-08-25T16:00:56Z,2026-10-04T17:00:00Z,0.445,0.555,,"['Bills', 'Patriots']","['0.445', '0.555']","['[""115092914762898493707628303052407632664695177476052295440901580015824196655530""', '""99552908950839864569637313833533105087955988022290375467804477332353890340486""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338508+00:00,634891,Will the Democrats win the Nebraska Senate race in 2026?,"This market will resolve according to the winner of the 2026 midterm Nebraska U.S. Senate election, inclusive of any run-offs.
+
+A candidate shall be considered to represent a party in the event that he or she is the nominee of the party in question. Candidates other than the Democratic or Republican nominee (e.g., Greens, Libertarian, independent) may be added at a later date.
+
+Candidates who run as independents will not be encompassed by the “Democrat” or “Republican” options regardless of any ",will-the-democrats-win-the-nebraska-senate-race-in-2026,104624.10643100001,66654.70686,2025-10-13T21:04:13.59767Z,2026-11-04T04:59:00Z,0.001,0.999,,"['Yes', 'No']","['0.001', '0.999']","['[""55269299240433422758148290868724152324629587438760275683104577693660207425448""', '""81262665299593332402996254810488669553080330014117799642811352427402737700753""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338523+00:00,3919632,Colts vs. Commanders: O/U 53.5,"In the upcoming NFL game, scheduled for October 4 at 9:30 AM ET:
+
+This market will resolve to ""Over"" if the Colts and Commanders combine to score 54 or more points in this game.
+
+If the combined total is less than 54, this market will resolve to ""Under"".
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50-50.",nfl-ind-was-2026-10-04-total-53pt5,104691.667283,93923.1886,2026-08-27T00:31:02Z,2026-10-04T13:30:00Z,0.305,0.695,,"['Over', 'Under']","['0.305', '0.695']","['[""32530991970761150795728804720098983263609674091223658014854976756911483576003""', '""33013564920989355790543238989258161175539949473926076109883676661202319572064""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338533+00:00,732180,Felix Protocol FDV above $25M one day after launch?,"This market will resolve to ""Yes"" if the Fully Diluted Valuation of Felix's token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to ""No.""
+
+The token must be actively, publicly transferable and tradable to be considered a launch.
+
+The FDV will be determined using the total token supply multiplied by the token price.
+
+""1 day after launch"" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is ",felix-protocol-fdv-above-25m-one-day-after-launch-592,104707.43903200001,503.5413,2025-11-28T14:05:25.29Z,,0.15,0.85,,"['Yes', 'No']","['0.15', '0.85']","['[""36780688419748310429823834153895565417163369985387937312847203605971229642989""', '""100405034460004198501186921620117764361747402170644193871115678466499612019301""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338544+00:00,5175492,San Diego Padres vs. Milwaukee Brewers,"In the upcoming MLB game between the San Diego Padres and Milwaukee Brewers, scheduled for October 4 at 4:00PM ET:
+
+This market will resolve to ""San Diego Padres"" if the San Diego Padres win the game.
+
+This market will resolve to ""Milwaukee Brewers"" if the Milwaukee Brewers win the game.
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, or ends in a tie, this market will resolve 50-50.
+
+The primary r",mlb-sd-mil-2026-10-04,10481.841063000002,328237.2477,2026-10-01T13:00:20Z,2026-10-11T20:00:00Z,0.445,0.555,,"['San Diego Padres', 'Milwaukee Brewers']","['0.445', '0.555']","['[""93104688351193532204933482807658728207464909911555979026928640359050175189612""', '""78319177099485031273782509987748733108828745013961784606117533127715925765016""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338563+00:00,5170740,"Will Bitcoin dip to $75,000 in October?","This market will immediately resolve to ""Yes"" if any Binance 1 minute candle for BTC/USDT during the month specified in the title (from 00:00 AM ET on the first day to 11:59 PM ET on the last), has a final Low price equal to or lower than the price specified in the title. Otherwise, this market will resolve to ""No.""
+
+The resolution source for this market is Binance, specifically the BTC/USDT Low prices available at https://www.binance.com/en/trade/BTC_USDT, with the chart settings on ""1m"" for on",will-bitcoin-dip-to-75k-in-october-2026,104835.880992,60293.0057,2026-10-01T05:07:13Z,2026-11-01T04:00:00Z,0.215,0.785,,"['Yes', 'No']","['0.215', '0.785']","['[""65710340847928463620991566082994656002922673891777077235559888767925599088131""', '""34913450717134692139134503608237195358004980714821621364139815843727767877427""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338574+00:00,601823,Will Eduardo Bolsonaro win the 2026 Brazilian presidential election?,"A presidential election is scheduled to take place in Brazil on October 4, 2026.
+
+This market will resolve according to the listed candidate that wins this election.
+
+This market includes any potential second round. If the result of this election isn't known by June 30, 2027, 11:59 PM ET, the market will resolve to ""Other"".
+
+This market will resolve based on the result of the election as indicated by a consensus of credible reporting. If there is ambiguity, this market will resolve based solely ",will-eduardo-bolsonaro-win-the-2026-brazilian-presidential-election,10485707.335772,2488006.92822,2025-09-18T20:08:02.206Z,2026-10-05T03:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""68827474128979817444758177181483142354604256745613325980470518365059439724226""', '""74201542293075536162258436779948914914665324387949186755842303569200449516790""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338585+00:00,4859246,1H Spread: Colts (-2.5),"In the first half of the NFL game between Colts and Commanders, scheduled for October 4 at 9:30 AM ET:
+
+This market will resolve to ""Colts"" if the Colts outscore the Commanders by 3 or more points in the first half.
+
+Otherwise, this market will resolve to ""Commanders"".
+
+Only points scored during that period count; overtime is not included.
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market",nfl-ind-was-2026-10-04-1h-spread-away-2pt5,10486.287518000003,97220.3286,2026-09-22T20:55:16Z,2026-10-04T13:30:00Z,0.565,0.435,,"['Colts', 'Commanders']","['0.565', '0.435']","['[""106943615570161631861644191266767008899008538857545458203874686086064159724550""', '""107058691276461128136743852074211729392842412170304981250903865122893731612902""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338595+00:00,3875279,Cowboys vs. Texans: O/U 49.5,"In the upcoming NFL game, scheduled for October 4 at 1:00 PM ET:
+
+This market will resolve to ""Over"" if the Cowboys and Texans combine to score 50 or more points in this game.
+
+If the combined total is less than 50, this market will resolve to ""Under"".
+
+If the game is postponed, this market will remain open until the game has been completed. If the game is canceled entirely, with no make-up game, this market will resolve 50-50.",nfl-dal-hou-2026-10-04-total-49pt5,1048.7714099999998,135202.3061,2026-08-25T16:01:01Z,2026-10-04T17:00:00Z,0.475,0.525,,"['Over', 'Under']","['0.475', '0.525']","['[""86338087756454817683488507883379686610677822485088111955583527115831648310601""', '""111338146669935910369648866577078342876474198267327338061518878521431876201077""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338609+00:00,561980,Will Nikki Haley win the 2028 Republican presidential nomination?,"This market will resolve to “Yes” if the named individual wins and accepts the 2028 nomination of the Republican Party for U.S. president. Otherwise, this market will resolve to “No”.
+
+The resolution source for this market will be a consensus of official Republican Party sources.
+
+Any replacement of the Republican nominee before election day will not change the resolution of the market.",will-nikki-haley-win-the-2028-republican-presidential-nomination,10491567.044272,1272308.62957,2025-07-11T19:42:10.258Z,2028-11-08T04:59:00Z,0.0015,0.9985,,"['Yes', 'No']","['0.0015', '0.9985']","['[""30919109558246209971545892228598482722881502507049010402392877610451001659386""', '""26953454878227822916154850804639118151137570755140575650667657375528451821297""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338622+00:00,630883,Will the Democrats win the North Carolina Senate race in 2026?,"This market will resolve according to the winner of the 2026 midterm North Carolina U.S. Senate election, inclusive of any run-offs.
+
+A candidate shall be considered to represent a party in the event that he or she is the nominee of the party in question. Candidates other than the Democratic or Republican nominee (e.g., Greens, Libertarian, independent) may be added at a later date.
+
+Candidates who run as independents will not be encompassed by the “Democrat” or “Republican” options regardless o",will-the-democrats-win-the-north-carolina-senate-race-in-2026,104957.22166999998,89974.92083,2025-10-13T21:36:04.596Z,2026-11-04T04:59:00Z,0.963,0.037,,"['Yes', 'No']","['0.963', '0.037']","['[""107151098936186723859677628536733880558851060002514795735761427447010628440047""', '""111394826590193310622075208085123253955586587501538476190057516703346418362600""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338633+00:00,1643703,Will Trump be impeached before his term ends?,"This market will resolve to “Yes“ if the US House of Representatives, by simple majority vote, approves or passes one or more articles of impeachment of President Donald Trump between market creation and January 20, 2029, at 12:00 PM ET. Otherwise, this market will resolve to ""No"".
+
+Neither trial nor conviction by the US Senate, nor removal from office, is necessary to resolve this market to “Yes“.
+
+The primary resolution source for this market will be information from the federal government of ",will-trump-be-impeached-before-his-term-ends,104968.299929,41938.9151,2026-03-19T18:06:33.91Z,2029-01-20T17:00:00Z,0.71,0.29,,"['Yes', 'No']","['0.71', '0.29']","['[""99020283867209289889119738709824148614345922887757122199903300146152690995270""', '""93407877955114874013681720453737167910717495090774867631160491764908235156561""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338644+00:00,2299989,Will OpenAI's valuation hit (HIGH) $1.25T by December 31?,"This market will resolve to ""Yes"" if OpenAI's private market valuation, as measured by the NPM Price reported by Nasdaq Private Market, LLC (NPM) for any date between market creation and December 31, 2026, reaches or exceeds the listed amount. Otherwise, this market will resolve to ""No"".
+
+NPM Prices are published for trading days only and are updated once daily at 1:00 PM ET on the following calendar day.
+
+If NPM has not published relevant data for all business dates in the specified period by 1",will-openais-valuation-hit-high-1pt25t-by-december-31-366-424,104994.05761099998,8945.0522,2026-05-19T05:09:42.792Z,2027-01-05T04:59:00Z,0.83,0.17,,"['Yes', 'No']","['0.83', '0.17']","['[""8033162936928559253333848688381590375050619493941525685487640680779354413355""', '""52829035678307731384432826724598359908944475852040374760518084173437980551487""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338654+00:00,601824,Will Carlos Roberto Massa Júnior win the 2026 Brazilian presidential election?,"A presidential election is scheduled to take place in Brazil on October 4, 2026.
+
+This market will resolve according to the listed candidate that wins this election.
+
+This market includes any potential second round. If the result of this election isn't known by June 30, 2027, 11:59 PM ET, the market will resolve to ""Other"".
+
+This market will resolve based on the result of the election as indicated by a consensus of credible reporting. If there is ambiguity, this market will resolve based solely ",will-carlos-roberto-massa-jnior-win-the-2026-brazilian-presidential-election,10501753.546619002,2752664.76783,2025-09-18T20:08:03.912Z,2026-10-05T03:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""7424753944577407627798342086224300332261118341771286172561357635231967087849""', '""59719566460284176747563170948594542001910357576928243006415040827066185298735""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338673+00:00,1298649,OpenAI IPO closing market cap above $1T?,"This market will resolve to “Yes” if the official closing price for OpenAI's market capitalization on its first trading day is above the listed value. Otherwise, it will resolve to “No”.
+
+If no IPO occurs by December 31, 2027, 11:59 PM ET, this market will resolve to “No”.
+
+Market capitalization is defined as the total number of outstanding shares multiplied by the closing share price on the first trading day.
+
+Resolution will be based on the primary exchange’s official listing page. In the even",openai-ipo-closing-market-cap-above-1t,1055367.9107230003,4579.2847,2026-01-31T00:27:27.572Z,2028-01-01T04:59:00Z,0.725,0.275,,"['Yes', 'No']","['0.725', '0.275']","['[""2011448762453318924331890857436552502625185273746051467874416268100776921808""', '""37374318395281167819702754225484522381204606804163579477698382571172669062027""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338684+00:00,1349171,Will Toronto FC win the 2026 MLS Cup?,"This market will resolve according to the team that wins the 2026 MLS Cup. 
+
+If at any point it becomes impossible for a listed team to win the 2026 MLS Cup per the rules of MLS (e.g. they are mathematically eliminated), the corresponding market will resolve to “No”.
+
+If the 2026 MLS season is cancelled, postponed after December 31, 2026 ET, or there is otherwise no winner declared within that timeframe, this market will resolve to “Other”.
+
+The primary resolution source will be official informa",will-toronto-fc-win-the-2026-mls-cup,105571.25401400003,27443.90821,2026-02-17T23:33:28.902222Z,2027-01-01T04:59:00Z,0.0005,0.9995,,"['Yes', 'No']","['0.0005', '0.9995']","['[""42335990546310621247445195387932799535387326563871405747692157775123222622808""', '""86763332907083744118630738465949427198763692058029676773384493533410775048201""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338698+00:00,666829,"U.S. agrees to a new trade deal with ""Pakistan"" before 2027?","This market will resolve to ""Yes"" if a free trade agreement with the specified country or entity becomes law in the United States by December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to ""No"".
+
+This includes both agreements that become law through Senate ratification and Presidential approval, or through the enactment of a Congressional-Executive Agreement signed into law by the President.
+
+The resolution source will be a consensus of credible reporting.",us-agrees-to-a-new-trade-deal-with-pakistan-before-2027,105706.479811,11791.7454,2025-11-05T22:03:17.622116Z,2027-01-01T04:59:00Z,0.105,0.895,,"['Yes', 'No']","['0.105', '0.895']","['[""106678482949686807514521807869023997292562870600205298892083913016183200129814""', '""77476439915528145769160598735739440309065478881301683761570168128413444490226""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338708+00:00,1087311,Will US unemployment reach at least 6.0% in 2026?,"This market will resolve to “Yes” if any seasonally adjusted unemployment rate (total unemployed, as a percent of the civilian labor force, official unemployment rate denoted as U-3) reported by the Bureau of Labor Statistics in an “Employment Situation Report” for a reference month in 2026 is greater than or equal to the listed percentage. Otherwise, this market will resolve to “No”.
+
+The relevant reports for this market are the Employment Situation Reports for January-December, 2026. This mark",will-us-unemployment-reach-at-least-6pt0-in-2026,99919.35934000001,4101.03722,2026-01-02T18:54:51.156656Z,2027-02-01T04:59:00Z,0.004,0.996,,"['Yes', 'No']","['0.004', '0.996']","['[""108018091346802760465812775595296174303353396224301843350580443613286618815662""', '""96642366744342985490084449360899727131798386706388378322762704898800180852422""]']",True,0
+2026-10-04,2026-10-04T13:11:35.338720+00:00,2413330,"Will Anthropic IPO by December 31, 2026?","This market will resolve to ""Yes"" if Anthropic shares are listed on a public securities exchange and open for trading by 11:59 PM ET on the listed date. Otherwise, this market will resolve to ""No.""
+
+If Anthropic is acquired by another company that is already public, this market will immediately resolve to ""No.""
+
+The primary resolution source for this market is official filings and announcements from Anthropic and the relevant securities exchange on which the shares are listed, including SEC fili",will-anthropic-ipo-by-december-31-2026-546-128-719,999105.6269430001,22494.0998,2026-06-01T21:08:16.043Z,2027-01-01T04:59:00Z,0.825,0.175,,"['Yes', 'No']","['0.825', '0.175']","['[""48566046548914168443252668519852295704538578584318207505303160546351275413281""', '""93059136868154519251041831451057854973981985548329066772466504724611138205828""]']",True,0

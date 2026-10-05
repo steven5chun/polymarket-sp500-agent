@@ -1,0 +1,94 @@
+prediction_id,timestamp,contract_id,contract_question,contract_volume,contract_yes_price,contract_sentiment_score,contract_signal,sector_id,sector_sentiment_score,sector_signal
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1087311,Will US unemployment reach at least 6.0% in 2026?,99919.35934000001,0.004,1.0,Bullish,economic_growth,1.0,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1068762,"Will USDC hit 50% of USDT market cap by December 31, 2026?",101848.78362300001,0.265,0.5,Neutral,financial_system,0.484,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,5170746,"Will Bitcoin dip to $60,000 in October?",101926.33229599998,0.017,0.9,Bullish,financial_system,0.484,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1560264,Will Solana hit $60 or $140 first?,101994.16181300001,0.232,0.75,Bullish,financial_system,0.484,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,2468459,"Will Ethereum dip to $700 by December 31, 2026?",10269.104265,0.0215,0.98,Bullish,financial_system,0.484,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1106059,Over $1B raised on Coinbase in 2026?,103588.98774299998,0.11,0.1,Bearish,financial_system,0.484,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,5170729,"Will Bitcoin reach $102,500 in October?",103902.68248299998,0.065,0.1,Bearish,financial_system,0.484,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,732180,Felix Protocol FDV above $25M one day after launch?,104707.43903200001,0.15,0.2,Bearish,financial_system,0.484,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,5170740,"Will Bitcoin dip to $75,000 in October?",104835.880992,0.215,0.8,Bullish,financial_system,0.484,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,950123,"Trump, Putin, and Zelensky seen together before 2027?",101310.748063,0.07,0.1,Bearish,geopolitical_conflict,0.5087,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,2364958,Will Trump and Putin meet next in United States?,101504.26712399998,0.036,0.1,Bearish,geopolitical_conflict,0.5087,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1469751,Will Masoud Pezeshkian be head of state in Iran end of 2026?,1032383.071278,0.004,0.5,Neutral,geopolitical_conflict,0.5087,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,678782,Will the US strike 13 countries in 2026?,103856.40714699998,0.005,1.0,Bullish,geopolitical_conflict,0.5087,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,2747387,Iran coup attempt by December 31?,104247.34415500001,0.095,0.9,Bullish,geopolitical_conflict,0.5087,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,559655,Will Josh Shapiro win the 2028 Democratic presidential nomination?,10069248.524027986,0.058,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,630964,Will the Republicans win the Texas Senate race in 2026?,1008059.5682200006,0.365,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,630963,Will the Democrats win the Texas Senate race in 2026?,1009971.5127250002,0.635,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,568116,"Will Trump be impeached by December 31, 2026?",1037992.341455,0.0225,0.98,Bullish,us_political_stability,0.5199,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,634891,Will the Democrats win the Nebraska Senate race in 2026?,104624.10643100001,0.001,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,561980,Will Nikki Haley win the 2028 Republican presidential nomination?,10491567.044272,0.0015,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,630883,Will the Democrats win the North Carolina Senate race in 2026?,104957.22166999998,0.963,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1643703,Will Trump be impeached before his term ends?,104968.299929,0.71,0.3,Bearish,us_political_stability,0.5199,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1294365,"Will Gold (GC) hit (HIGH) $10,000 by end of December?",100876.473372,0.016,0.5,Neutral,energy_commodities,0.5,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,666829,"U.S. agrees to a new trade deal with ""Pakistan"" before 2027?",105706.479811,0.105,0.1,Bearish,trade_regulatory,0.1,Bearish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,2431420,Will Mistral have the best AI model at the end of December 2026?,101025.71761600001,0.0015,0.5,Neutral,technology_cyber,0.7263,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1131458,Will SpaceX have between 160-179 launches in 2026?,102049.90666000001,0.0255,0.1,Bearish,technology_cyber,0.7263,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1820798,Will a Chinese company have the best AI model by December 31?,103235.82771599999,0.075,0.9,Bullish,technology_cyber,0.7263,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,916715,Will less than 5 SpaceX Starship launches successfully reach Space in 2026?,103959.59075999999,0.36,0.64,Bullish,technology_cyber,0.7263,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,1298649,OpenAI IPO closing market cap above $1T?,1055367.9107230003,0.725,0.8,Bullish,technology_cyber,0.7263,Bullish
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,2324605,Will Oura's market cap be between $7.5B and $10B at market close on IPO day?,100166.22294300003,0.032,0.5,Neutral,stock_prediction,0.4662,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,676744,Will Saudi Aramco be the largest company in the world by market cap on December 31?,1006007.557029,0.0015,0.5,Neutral,stock_prediction,0.4662,Neutral
+pred_20261004_396,2026-10-04T14:16:22.629898+00:00,2324607,Will Oura's market cap be between $12.5B and $15B at market close on IPO day?,102023.03464899998,0.0185,0.1,Bearish,stock_prediction,0.4662,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1087311,Will US unemployment reach at least 6.0% in 2026?,99919.35934000001,0.004,0.95,Bullish,economic_growth,0.95,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1068762,"Will USDC hit 50% of USDT market cap by December 31, 2026?",101848.78362300001,0.265,0.5,Neutral,financial_system,0.4813,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,5170746,"Will Bitcoin dip to $60,000 in October?",101926.33229599998,0.017,0.8,Bullish,financial_system,0.4813,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1560264,Will Solana hit $60 or $140 first?,101994.16181300001,0.232,0.55,Neutral,financial_system,0.4813,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,2468459,"Will Ethereum dip to $700 by December 31, 2026?",10269.104265,0.0215,0.9,Bullish,financial_system,0.4813,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1106059,Over $1B raised on Coinbase in 2026?,103588.98774299998,0.11,0.1,Bearish,financial_system,0.4813,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,5170729,"Will Bitcoin reach $102,500 in October?",103902.68248299998,0.065,0.1,Bearish,financial_system,0.4813,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,5170740,"Will Bitcoin dip to $75,000 in October?",104835.880992,0.215,0.8,Bullish,financial_system,0.4813,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,950123,"Trump, Putin, and Zelensky seen together before 2027?",101310.748063,0.07,0.1,Bearish,geopolitical_conflict,0.529,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,2364958,Will Trump and Putin meet next in United States?,101504.26712399998,0.036,0.4,Neutral,geopolitical_conflict,0.529,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1469751,Will Masoud Pezeshkian be head of state in Iran end of 2026?,1032383.071278,0.004,0.5,Neutral,geopolitical_conflict,0.529,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,678782,Will the US strike 13 countries in 2026?,103856.40714699998,0.005,0.99,Bullish,geopolitical_conflict,0.529,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,2747387,Iran coup attempt by December 31?,104247.34415500001,0.095,0.9,Bullish,geopolitical_conflict,0.529,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,559655,Will Josh Shapiro win the 2028 Democratic presidential nomination?,10069248.524027986,0.058,0.5,Neutral,us_political_stability,0.52,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,630964,Will the Republicans win the Texas Senate race in 2026?,1008059.5682200006,0.365,0.5,Neutral,us_political_stability,0.52,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,630963,Will the Democrats win the Texas Senate race in 2026?,1009971.5127250002,0.635,0.5,Neutral,us_political_stability,0.52,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,568116,"Will Trump be impeached by December 31, 2026?",1037992.341455,0.0225,0.98,Bullish,us_political_stability,0.52,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,561980,Will Nikki Haley win the 2028 Republican presidential nomination?,10491567.044272,0.0015,0.5,Neutral,us_political_stability,0.52,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,630883,Will the Democrats win the North Carolina Senate race in 2026?,104957.22166999998,0.963,0.5,Neutral,us_political_stability,0.52,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1643703,Will Trump be impeached before his term ends?,104968.299929,0.71,0.3,Bearish,us_political_stability,0.52,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1294365,"Will Gold (GC) hit (HIGH) $10,000 by end of December?",100876.473372,0.016,0.9,Bullish,energy_commodities,0.9,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,666829,"U.S. agrees to a new trade deal with ""Pakistan"" before 2027?",105706.479811,0.105,0.1,Bearish,trade_regulatory,0.1,Bearish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,2431420,Will Mistral have the best AI model at the end of December 2026?,101025.71761600001,0.0015,0.8,Bullish,technology_cyber,0.7795,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1820798,Will a Chinese company have the best AI model by December 31?,103235.82771599999,0.075,0.9,Bullish,technology_cyber,0.7795,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,916715,Will less than 5 SpaceX Starship launches successfully reach Space in 2026?,103959.59075999999,0.36,0.64,Bullish,technology_cyber,0.7795,Bullish
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,2324605,Will Oura's market cap be between $7.5B and $10B at market close on IPO day?,100166.22294300003,0.032,0.5,Neutral,stock_prediction,0.6465,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,676744,Will Saudi Aramco be the largest company in the world by market cap on December 31?,1006007.557029,0.0015,0.5,Neutral,stock_prediction,0.6465,Neutral
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,1298649,OpenAI IPO closing market cap above $1T?,1055367.9107230003,0.725,0.8,Bullish,stock_prediction,0.6465,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1087311,Will US unemployment reach at least 6.0% in 2026?,99919.35934000001,0.004,1.0,Bullish,economic_growth,1.0,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1068762,"Will USDC hit 50% of USDT market cap by December 31, 2026?",101848.78362300001,0.265,0.5,Neutral,financial_system,0.5313,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,5170746,"Will Bitcoin dip to $60,000 in October?",101926.33229599998,0.017,0.9,Bullish,financial_system,0.5313,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1560264,Will Solana hit $60 or $140 first?,101994.16181300001,0.232,0.8,Bullish,financial_system,0.5313,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,2468459,"Will Ethereum dip to $700 by December 31, 2026?",10269.104265,0.0215,0.8,Bullish,financial_system,0.5313,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,4177246,Will Artificial Inu be the first to hit a $1B FDV?,103522.68301699999,0.115,0.5,Neutral,financial_system,0.5313,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1106059,Over $1B raised on Coinbase in 2026?,103588.98774299998,0.11,0.1,Bearish,financial_system,0.5313,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,5170729,"Will Bitcoin reach $102,500 in October?",103902.68248299998,0.065,0.1,Bearish,financial_system,0.5313,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,5170740,"Will Bitcoin dip to $75,000 in October?",104835.880992,0.215,0.8,Bullish,financial_system,0.5313,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,950123,"Trump, Putin, and Zelensky seen together before 2027?",101310.748063,0.07,0.1,Bearish,geopolitical_conflict,0.5087,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,2364958,Will Trump and Putin meet next in United States?,101504.26712399998,0.036,0.1,Bearish,geopolitical_conflict,0.5087,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1469751,Will Masoud Pezeshkian be head of state in Iran end of 2026?,1032383.071278,0.004,0.5,Neutral,geopolitical_conflict,0.5087,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,678782,Will the US strike 13 countries in 2026?,103856.40714699998,0.005,1.0,Bullish,geopolitical_conflict,0.5087,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,2747387,Iran coup attempt by December 31?,104247.34415500001,0.095,0.9,Bullish,geopolitical_conflict,0.5087,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,559655,Will Josh Shapiro win the 2028 Democratic presidential nomination?,10069248.524027986,0.058,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,630964,Will the Republicans win the Texas Senate race in 2026?,1008059.5682200006,0.365,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,630963,Will the Democrats win the Texas Senate race in 2026?,1009971.5127250002,0.635,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,568116,"Will Trump be impeached by December 31, 2026?",1037992.341455,0.0225,0.98,Bullish,us_political_stability,0.5199,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,634891,Will the Democrats win the Nebraska Senate race in 2026?,104624.10643100001,0.001,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,561980,Will Nikki Haley win the 2028 Republican presidential nomination?,10491567.044272,0.0015,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,630883,Will the Democrats win the North Carolina Senate race in 2026?,104957.22166999998,0.963,0.5,Neutral,us_political_stability,0.5199,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1643703,Will Trump be impeached before his term ends?,104968.299929,0.71,0.3,Bearish,us_political_stability,0.5199,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1294365,"Will Gold (GC) hit (HIGH) $10,000 by end of December?",100876.473372,0.016,0.9,Bullish,energy_commodities,0.9,Bullish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,666829,"U.S. agrees to a new trade deal with ""Pakistan"" before 2027?",105706.479811,0.105,0.1,Bearish,trade_regulatory,0.1,Bearish
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,2431420,Will Mistral have the best AI model at the end of December 2026?,101025.71761600001,0.0015,0.5,Neutral,technology_cyber,0.6455,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1131458,Will SpaceX have between 160-179 launches in 2026?,102049.90666000001,0.0255,0.5,Neutral,technology_cyber,0.6455,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1131150,"Will the Doge-1 Lunar Mission launch by December 31, 2026?",1023642.6656139997,0.0385,0.5,Neutral,technology_cyber,0.6455,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1820798,Will a Chinese company have the best AI model by December 31?,103235.82771599999,0.075,0.8,Bullish,technology_cyber,0.6455,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,916715,Will less than 5 SpaceX Starship launches successfully reach Space in 2026?,103959.59075999999,0.36,0.64,Bullish,technology_cyber,0.6455,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1298649,OpenAI IPO closing market cap above $1T?,1055367.9107230003,0.725,0.8,Bullish,technology_cyber,0.6455,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,2324605,Will Oura's market cap be between $7.5B and $10B at market close on IPO day?,100166.22294300003,0.032,0.5,Neutral,stock_prediction,0.5,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,676744,Will Saudi Aramco be the largest company in the world by market cap on December 31?,1006007.557029,0.0015,0.5,Neutral,stock_prediction,0.5,Neutral
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,2324607,Will Oura's market cap be between $12.5B and $15B at market close on IPO day?,102023.03464899998,0.0185,0.5,Neutral,stock_prediction,0.5,Neutral

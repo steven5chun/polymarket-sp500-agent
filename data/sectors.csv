@@ -1,0 +1,17 @@
+prediction_id,timestamp,sector_id,sector_name,sentiment_score,stress_coefficient,signal,contract_count,total_volume,spx_weight
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,economic_growth,economic_growth,0.95,0.9299,Bullish,1,99919.35934000001,1.0
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,financial_system,financial_system,0.4813,0.6657,Bullish,7,628365.933215,0.95
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,geopolitical_conflict,geopolitical_conflict,0.529,0.898,Neutral,5,1443301.837767,0.9
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,us_political_stability,us_political_stability,0.52,0.7751,Neutral,7,23826764.512298986,0.85
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,energy_commodities,energy_commodities,0.9,0.9082,Bullish,1,100876.473372,0.8
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,trade_regulatory,trade_regulatory,0.1,0.7442,Bearish,1,105706.479811,0.8
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,technology_cyber,technology_cyber,0.7795,0.666,Bullish,3,308221.136092,0.7
+pred_20261004_131,2026-10-04T14:49:24.555121+00:00,stock_prediction,stock_prediction,0.6465,0.836,Neutral,3,2161541.6906950003,0.65
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,economic_growth,economic_growth,1.0,0.9299,Bullish,1,99919.35934000001,1.0
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,financial_system,financial_system,0.5313,0.673,Bullish,8,731888.616232,0.95
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,geopolitical_conflict,geopolitical_conflict,0.5087,0.898,Neutral,5,1443301.837767,0.9
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,us_political_stability,us_political_stability,0.5199,0.7956,Neutral,8,23931388.618729986,0.85
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,energy_commodities,energy_commodities,0.9,0.9082,Bullish,1,100876.473372,0.8
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,trade_regulatory,trade_regulatory,0.1,0.7442,Bearish,1,105706.479811,0.8
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,technology_cyber,technology_cyber,0.6455,0.7396,Neutral,6,2489281.619089,0.7
+pred_20261004_384,2026-10-04T23:19:58.886904+00:00,stock_prediction,stock_prediction,0.5,0.968,Neutral,3,1208196.814621,0.65
