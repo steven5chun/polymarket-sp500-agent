@@ -7,57 +7,51 @@ This document explains how the Polymarket S&P 500 Predictor discovers, classifie
 ## Pipeline Overview
 
 ```text
-User Query
-    │
-    ▼
 ┌──────────────────────────────────────┐
-│  1. Discovery Agent                  │  Search Polymarket for contracts
-│     (CrewAI + LLM)                   │  relevant to the query
+│  1. Fetch All Contracts              │  Fetch ALL active Polymarket contracts
+│     (data_harvester)                 │  Filter: volume > $50K OR liquidity > $50K
+│                                      │  Cache to polymarket-contracts.csv
 └──────────────┬───────────────────────┘
                │ (raw contracts)
                ▼
 ┌──────────────────────────────────────┐
-│  2. Data Filtering                   │  Filter by liquidity (>= $50k)
-│     (Deterministic)                  │  Filter by expiry (remove stale)
-└──────────────┬───────────────────────┘
-               │ (active, liquid contracts)
-               ▼
-┌──────────────────────────────────────┐
-│  3. Sector Classifier                │  Pure LLM: determines sector,
+│  2. Sector Classifier                │  Pure LLM: determines sector,
 │     (Pure LLM)                       │  sentiment_score, and signal
 └──────────────┬───────────────────────┘
                │ (grouped contracts)
                ▼
 ┌──────────────────────────────────────┐
-│  4. Quant Scorer                     │  Aggregates LLM-provided sentiment
+│  3. Quant Scorer                     │  Aggregates LLM-provided sentiment
 │     (Pure LLM)                       │  scores + stress coefficients
 └──────────────┬───────────────────────┘
                │ (sector sentiments + aggregate)
                ▼
 ┌──────────────────────────────────────┐
-│  5. S&P 500 Predictor                │  Generate directional forecast
+│  4. S&P 500 Predictor                │  Generate directional forecast
 │     (Deterministic + LLM)            │  with sector breakdown
 └──────────────┬───────────────────────┘
                │ (prediction report)
                ▼
 ┌──────────────────────────────────────┐
-│  6. Prediction Logger                │  Save to 3 CSV files
+│  5. Prediction Logger                │  Save to 3 CSV files
 │     (Automatic)                      │  (predictions, sectors, detail)
 └──────────────────────────────────────┘
 ```
 
 ---
 
-## 1. Discovery Agent
+## 1. Data Harvesting & Filtering
 
-**File:** `src/agents/discovery_agent.py`
+**Files:** `src/agents/data_harvester.py`, `src/agents/discovery_agent.py`
 
-The Discovery Agent searches Polymarket for contracts relevant to a user query (e.g., "oil prices", "Federal Reserve"). It uses two tools:
+### Fetching All Contracts
 
-- `harvest_contracts(query)` - Fetches contracts from the Gamma API, filters by liquidity (>= $50k volume), and extracts features (prices, volume, token IDs).
-- `search_events(query)` - Fetches event clusters from the Gamma API.
+The system fetches ALL active Polymarket contracts (no search query needed) using a multi-segment strategy to work around API limits:
 
-The LLM then assesses each contract's relevance to S&P 500 directional movement and returns a structured JSON with `relevant_contracts`, `market_regime`, and `summary`.
+- `fetch_all_markets()` - Fetches all active markets via multiple API segments (low-vol, high-vol, recent)
+- `fetch_and_cache_contracts()` - Filters by volume > $50K OR liquidity > $50K, removes expired contracts, caches to `data/polymarket-contracts.csv`
+
+The Discovery Agent (`src/agents/discovery_agent.py`) uses CrewAI to orchestrate the fetching and classification process. The LLM assesses each contract's relevance to S&P 500 directional movement and returns a structured JSON with `relevant_contracts`, `market_regime`, and `summary`.
 
 ### Contract Expiry Filtering
 
@@ -316,17 +310,14 @@ This means economic growth affects the entire index, with an average sensitivity
 Contract 1: "Will US GDP grow >2% in 2024?"
   - Volume: $2.5M
   - Yes Price: 0.72 (72% probability)
-  - Relevance: High
 
 Contract 2: "Will US enter recession in 2024?"
   - Volume: $3.8M
-  - No Price: 0.68 (68% probability of no recession)
-  - Relevance: High
+  - Yes Price: 0.32 (32% probability of recession)
 
 Contract 3: "Will unemployment stay below 4.5%?"
   - Volume: $1.2M
   - Yes Price: 0.65 (65% probability)
-  - Relevance: Medium
 ```
 
 **Classification (Pure LLM):**
@@ -540,7 +531,10 @@ else:
 - Higher volume contracts have more influence on the sector sentiment
 - Range: 0.0 (fully bearish) to 1.0 (fully bullish)
 
-**Signal Aggregation:**
+### Sector Signal Determination
+
+Each contract already has a `signal` (Bullish/Bearish/Neutral) from the LLM classifier. The sector signal is determined by majority vote:
+
 ```
 bullish_count = count(contracts where signal == "Bullish")
 bearish_count = count(contracts where signal == "Bearish")
@@ -552,14 +546,6 @@ elif bearish > bullish and bearish > neutral:
     sector_signal = "Bearish"
 else:
     sector_signal = "Neutral"
-```
-
-### Signal Assignment
-
-```
-if adjusted_sentiment > 0.6:  signal = "Bullish"
-if adjusted_sentiment < 0.4:  signal = "Bearish"
-else:                         signal = "Neutral"
 ```
 
 ### Aggregate Sentiment (across all sectors)
@@ -620,10 +606,10 @@ The final output includes:
 ```text
 Polymarket Gamma API
     │
-    │  search_markets(query)
-    │  filter_by_liquidity(>= $50k)
+    │  fetch_all_markets()
+    │  filter_by_volume_or_liquidity(>= $50k)
     │  filter_by_expiry(remove expired/not-yet-active)
-    │  extract_market_features()
+    │  cache to polymarket-contracts.csv
     │
     ▼
 Raw Contracts (list of dicts)
@@ -694,7 +680,7 @@ python -m src.pipeline
 |------|---------|
 | `src/sectors.py` | 10-sector taxonomy with weights |
 | `src/agents/data_harvester.py` | Polymarket Gamma/CLOB REST API client with expiry filtering |
-| `src/agents/discovery_agent.py` | CrewAI agent that searches and filters contracts |
+| `src/agents/discovery_agent.py` | CrewAI agent that fetches all contracts and orchestrates classification |
 | `src/agents/sector_classifier.py` | Pure LLM sector classification + sentiment analysis |
 | `src/agents/quant_scorer.py` | Aggregates LLM-provided sentiment scores + stress coefficients |
 | `src/agents/spx_predictor.py` | Direction, confidence, sector breakdown, rationale |

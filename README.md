@@ -6,13 +6,13 @@ An autonomous multi-agent framework that fetches all active Polymarket contracts
 
 ## Overview
 
-This project leverages the **"Wisdom of the Crowds"** by tracking [prediction markets](./prediction-market.md) where capital allocators back their economic perspectives with real money. The system:
+This project leverages the **"Wisdom of the Crowds"** by tracking [prediction markets](prediction-market.md) where capital allocators back their economic perspectives with real money. The system:
 
-1. Fetches **all active Polymarket contracts** (volume > $50K)
+1. Fetches **all active Polymarket contracts** (volume > $50K OR liquidity > $50K)
 2. Caches contracts to `data/polymarket-contracts.csv` (refreshed daily)
-3. AI agent classifies each contract into one of 10 macro sectors
+3. LLM classifies each contract into one of 10 macro sectors AND determines sentiment score (0.0-1.0) and signal (Bullish/Bearish/Neutral)
 4. Contracts not fitting any sector are discarded
-5. Computes sector-level sentiment vectors
+5. Aggregates LLM-provided sentiment scores per sector using volume-weighted averaging
 6. Generates a 7-day directional S&P 500 forecast
 7. Logs predictions across 3 CSV files
 
@@ -27,15 +27,15 @@ This project leverages the **"Wisdom of the Crowds"** by tracking [prediction ma
                ▼
 ┌──────────────────────────────────────┐
 │  1. Fetch All Contracts              │  Fetch ALL active Polymarket contracts
-│     (data_harvester)                 │  Filter: volume > $50K, not expired
+│     (data_harvester)                 │  Filter: volume > $50K OR liquidity > $50K
 │                                      │  Cache to polymarket-contracts.csv
 └──────────────┬───────────────────────┘
                │
                ▼
 ┌──────────────────────────────────────┐
-│  2. AI Sector Classifier             │  LLM classifies each contract
-│     (sector_classifier)              │  into 10 sectors. Contracts not
-│                                      │  fitting any sector are discarded.
+│  2. AI Sector Classifier             │  Pure LLM: determines sector,
+│     (sector_classifier)              │  sentiment_score, and signal
+│                                      │  for each contract
 └──────────────┬───────────────────────┘
                │
                ▼
@@ -67,7 +67,7 @@ This project leverages the **"Wisdom of the Crowds"** by tracking [prediction ma
 - **Daily Contract Cache** - Contracts cached to `data/polymarket-contracts.csv`, refreshed once per day to avoid redundant API calls
 - **Pure LLM Classification & Sentiment** - LLM reads question + description + yes_price to determine sector, sentiment score, and signal for each contract
 - **Sector-Based Analysis** - Each sector weighted by historical S&P 500 impact
-- **Liquidity Filtering** - Only contracts with volume > $50K are considered
+- **Volume/Liquidity Filtering** - Only contracts with volume > $50K OR liquidity > $50K are considered
 - **Contract Expiry Filtering** - Removes expired and not-yet-active contracts
 - **Multi-LLM Support** - Configurable backend: OpenAI, Qwen (Alibaba Cloud), or Ollama (local)
 - **Real-Time Market Context** - Captures S&P 500 price, daily/weekly changes, and 50-day MA with each prediction
@@ -169,7 +169,7 @@ python -m scripts.run_daily_predictions --quiet
 ### How It Works
 
 1. **Fetch All Contracts** - Polymarket Gamma API returns all active markets
-2. **Filter** - Keep only contracts with volume > $50K and valid (non-expired) dates
+2. **Filter** - Keep only contracts with volume > $50K OR liquidity > $50K and valid (non-expired) dates
 3. **Cache** - Save to `data/polymarket-contracts.csv` (reused for same-day runs)
 4. **Pure LLM Classification** - LLM determines sector, sentiment_score (0.0-1.0), and signal for each contract
 5. **Discard Unmatched** - Contracts not fitting any sector are removed
@@ -240,7 +240,7 @@ One row per Polymarket contract. Contains classification and scores.
 
 ### 4. `data/polymarket-contracts.csv` - Contract Cache
 
-All active Polymarket contracts with volume > $50K. Overwritten daily.
+All active Polymarket contracts with volume > $50K OR liquidity > $50K. Overwritten daily.
 
 | Column | Description |
 |--------|-------------|
@@ -306,8 +306,8 @@ Qwen's API has content moderation that may block political/geopolitical content 
 │   ├── agents/
 │   │   ├── data_harvester.py           # Polymarket API client + caching
 │   │   ├── discovery_agent.py          # CrewAI agent (fetches all, no query)
-│   │   ├── sector_classifier.py        # AI sector classification
-│   │   ├── quant_scorer.py             # Sector-level sentiment scoring
+│   │   ├── sector_classifier.py        # Pure LLM sector classification + sentiment
+│   │   ├── quant_scorer.py             # Aggregates LLM sentiment scores + stress
 │   │   └── spx_predictor.py            # Directional prediction + rationale
 │   ├── sectors.py                      # 10-sector taxonomy + weights
 │   ├── llm.py                          # LLM provider factory
