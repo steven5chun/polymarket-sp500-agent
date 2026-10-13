@@ -32,3 +32,34 @@ pred_20261004_384,2026-10-04T23:19:58.886904+00:00,1298649,OpenAI IPO closing ma
 pred_20261004_384,2026-10-04T23:19:58.886904+00:00,2324605,Will Oura's market cap be between $7.5B and $10B at market close on IPO day?,100166.22294300003,0.032,0.5,Neutral,stock_prediction,0.5,Neutral
 pred_20261004_384,2026-10-04T23:19:58.886904+00:00,676744,Will Saudi Aramco be the largest company in the world by market cap on December 31?,1006007.557029,0.0015,0.5,Neutral,stock_prediction,0.5,Neutral
 pred_20261004_384,2026-10-04T23:19:58.886904+00:00,2324607,Will Oura's market cap be between $12.5B and $15B at market close on IPO day?,102023.03464899998,0.0185,0.5,Neutral,stock_prediction,0.5,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1087311,Will US unemployment reach at least 6.0% in 2026?,99937.35934,0.0055,0.95,Bullish,economic_growth,0.95,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1068762,"Will USDC hit 50% of USDT market cap by December 31, 2026?",101863.24362300002,0.28,0.5,Neutral,financial_system,0.5307,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1560264,Will Solana hit $60 or $140 first?,102173.98457300001,0.2455,0.75,Bullish,financial_system,0.5307,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,2468459,"Will Ethereum dip to $700 by December 31, 2026?",10290.038884,0.0215,0.98,Bullish,financial_system,0.5307,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1106059,Over $1B raised on Coinbase in 2026?,103588.98774299998,0.11,0.3,Bearish,financial_system,0.5307,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,950123,"Trump, Putin, and Zelensky seen together before 2027?",101812.11444599996,0.055,0.1,Bearish,geopolitical_conflict,0.5186,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1469751,Will Masoud Pezeshkian be head of state in Iran end of 2026?,1032554.3479420001,0.0035,0.5,Neutral,geopolitical_conflict,0.5186,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,678782,Will the US strike 13 countries in 2026?,103856.40714699998,0.0055,0.95,Bullish,geopolitical_conflict,0.5186,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,2364958,Will Trump and Putin meet next in United States?,103903.60426600001,0.0225,0.3,Bearish,geopolitical_conflict,0.5186,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,2747387,Iran coup attempt by December 31?,104326.04415500001,0.105,0.9,Bullish,geopolitical_conflict,0.5186,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,559655,Will Josh Shapiro win the 2028 Democratic presidential nomination?,10146990.486524012,0.062,0.5,Neutral,us_political_stability,0.5124,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,559702,Will Alex Padilla win the 2028 Democratic presidential nomination?,1039668.732999,0.0005,0.5,Neutral,us_political_stability,0.5124,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,568116,"Will Trump be impeached by December 31, 2026?",1039774.9967239997,0.018,0.9,Bullish,us_political_stability,0.5124,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,634891,Will the Democrats win the Nebraska Senate race in 2026?,104631.10643099996,0.001,0.5,Neutral,us_political_stability,0.5124,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,561980,Will Nikki Haley win the 2028 Republican presidential nomination?,10496762.458272,0.0015,0.5,Neutral,us_political_stability,0.5124,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,630883,Will the Democrats win the North Carolina Senate race in 2026?,105456.51038699997,0.9625,0.5,Neutral,us_political_stability,0.5124,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,562006,Will Eric Trump win the 2028 Republican presidential nomination?,10586687.836374,0.0015,0.5,Neutral,us_political_stability,0.5124,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,629337,Will the Democrats win the Georgia governor race in 2026?,105977.04557699998,0.475,0.5,Neutral,us_political_stability,0.5124,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1294365,"Will Gold (GC) hit (HIGH) $10,000 by end of December?",100902.48337199997,0.0135,0.9,Bullish,energy_commodities,0.907,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,676744,Will Saudi Aramco be the largest company in the world by market cap on December 31?,1031115.9570289999,0.0015,1.0,Bullish,energy_commodities,0.907,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,4936107,Will WTI Crude Oil (WTI) hit (LOW) $60 in October?,103691.055965,0.0075,0.5,Neutral,energy_commodities,0.907,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,4951226,Will WTI Crude Oil (WTI) hit (LOW) $85 in October?,104610.940406,0.755,0.4,Bearish,energy_commodities,0.907,Bullish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,666829,"U.S. agrees to a new trade deal with ""Pakistan"" before 2027?",105706.479811,0.09,0.2,Bearish,trade_regulatory,0.2,Bearish
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1820798,Will a Chinese company have the best AI model by December 31?,103431.33771599997,0.075,0.9,Bullish,technology_cyber,0.5495,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,2431424,Will Amazon have the best AI model at the end of December 2026?,103493.20264900001,0.0015,0.3,Bearish,technology_cyber,0.5495,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,916715,Will less than 5 SpaceX Starship launches successfully reach Space in 2026?,104160.95076,0.465,0.5,Neutral,technology_cyber,0.5495,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,2431422,Will Microsoft have the best AI model at the end of December 2026?,106251.517128,0.0015,0.5,Neutral,technology_cyber,0.5495,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,2324607,Will Oura's market cap be between $12.5B and $15B at market close on IPO day?,102048.034649,0.0185,0.5,Neutral,stock_prediction,0.7397,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1345234,"Will OpenAI’s market cap be $1.5T or greater at market close on IPO day by December 31, 2027?",102676.34733000002,0.5985,0.6,Neutral,stock_prediction,0.7397,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,2324605,Will Oura's market cap be between $7.5B and $10B at market close on IPO day?,103726.23294300002,0.022,0.5,Neutral,stock_prediction,0.7397,Neutral
+pred_20261007_583,2026-10-07T23:23:26.436001+00:00,1298649,OpenAI IPO closing market cap above $1T?,1055599.4534260002,0.725,0.8,Bullish,stock_prediction,0.7397,Neutral
