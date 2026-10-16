@@ -1,8 +1,8 @@
 """
-Sector classifier using pure LLM.
+Impact scorer using pure LLM.
 
-No keyword matching. LLM reads question + description + yes_price
-and determines: sector, sentiment_score, signal.
+LLM reads question + description + yes_price
+and determines: impact_score (0-100) and direction (Bullish/Bearish/Neutral).
 """
 
 import re
@@ -10,7 +10,6 @@ import json
 from typing import Any
 
 from src.llm import get_llm_object
-from src.sectors import SECTORS, get_sector
 
 
 SENSITIVE_PATTERNS = [
@@ -69,86 +68,87 @@ def filter_irrelevant_contracts(contracts: list[dict]) -> list[dict]:
     return relevant
 
 
-def classify_contracts_with_llm(contracts: list[dict], batch_size: int = 10) -> dict[str, list[dict]]:
-    """Classify contracts and determine sentiment using LLM only.
+def score_contracts_with_llm(contracts: list[dict], batch_size: int = 10) -> list[dict]:
+    """Score contracts for S&P 500 impact using LLM.
     
     For each contract, LLM determines:
-    1. Which sector it belongs to
-    2. Sentiment score (0.0 = very bearish for S&P 500, 1.0 = very bullish)
-    3. Signal (Bullish / Bearish / Neutral)
+    1. impact_score (0-100): Magnitude of potential S&P 500 impact
+       - 0 = no impact on S&P 500
+       - 100 = extremely high impact on S&P 500
+    2. direction: Bullish / Bearish / Neutral for S&P 500
     
     The LLM receives question, description, AND yes_price to make this determination.
     
     Args:
-        contracts: List of contract dicts to classify
+        contracts: List of contract dicts to score
         batch_size: Number of contracts to process per LLM call
     
     Returns:
-        Dict mapping sector_id to list of contracts in that sector
+        List of contracts with impact_score and direction added
     """
     llm = get_llm_object()
-    grouped = {sector_id: [] for sector_id in SECTORS.keys()}
-    
-    sector_list = "\n".join([f"- {sid}: {sector.name}" for sid, sector in SECTORS.items()])
+    scored_contracts = []
     
     for i in range(0, len(contracts), batch_size):
         batch = contracts[i:i + batch_size]
         batch_num = i // batch_size + 1
         total_batches = (len(contracts) + batch_size - 1) // batch_size
         
-        print(f"  Classifying batch {batch_num}/{total_batches} ({len(batch)} contracts)...")
+        print(f"  Scoring batch {batch_num}/{total_batches} ({len(batch)} contracts)...")
         
         contract_texts = []
         for idx, contract in enumerate(batch):
             question = sanitize_text(contract.get("question", ""))
             description = sanitize_text(contract.get("description", ""))[:300]
             yes_price = contract.get("yes_price", 0.5)
+            volume = contract.get("volume", 0)
             contract_texts.append(
                 f"[{idx}] Question: {question}\n"
                 f"    Description: {description}\n"
-                f"    Yes Price: {yes_price} ({yes_price*100:.1f}% probability)"
+                f"    Yes Price: {yes_price} ({yes_price*100:.1f}% probability)\n"
+                f"    Volume: ${volume:,.0f}"
             )
         
         contracts_str = "\n\n".join(contract_texts)
         
-        prompt = f"""You are analyzing prediction market contracts to determine their impact on the S&P 500 stock market.
+        prompt = f"""You are analyzing prediction market contracts to determine their IMPACT on the S&P 500 stock market.
 
 For each contract, determine:
-1. SECTOR: Which sector does this contract belong to?
-2. SENTIMENT SCORE: How does this contract's outcome affect S&P 500?
-   - 0.0 = very bearish for S&P 500
-   - 0.5 = neutral
-   - 1.0 = very bullish for S&P 500
-3. SIGNAL: "Bullish" (score > 0.6), "Bearish" (score < 0.4), or "Neutral" (0.4-0.6)
+1. IMPACT SCORE (0-100): How much could this contract's outcome impact the S&P 500?
+   - 0 = No impact on S&P 500 (niche topic, small market)
+   - 25 = Low impact (minor economic indicator, small policy change)
+   - 50 = Moderate impact (sector-specific news, medium policy)
+   - 75 = High impact (major economic data, significant policy, geopolitical event)
+   - 100 = Extremely high impact (Fed decision, recession, major war, financial crisis)
 
-CRITICAL: Think about the DIRECTION of impact based on the yes_price:
+2. DIRECTION: If this contract resolves YES, would it be Bullish, Bearish, or Neutral for S&P 500?
+   - "Bullish" = Good for S&P 500 (growth, peace, rate cuts, stability)
+   - "Bearish" = Bad for S&P 500 (recession, war, rate hikes, crisis)
+   - "Neutral" = Mixed or unclear impact
+
+CRITICAL: Consider the yes_price when determining DIRECTION:
 
 For BAD EVENT contracts (recession, war, crisis, unemployment, inflation spike):
-  - Low yes_price = bad event UNLIKELY = BULLISH for S&P 500 (score near 1.0)
-  - High yes_price = bad event LIKELY = BEARISH for S&P 500 (score near 0.0)
+  - Low yes_price = bad event UNLIKELY = BULLISH for S&P 500
+  - High yes_price = bad event LIKELY = BEARISH for S&P 500
 
 For GOOD EVENT contracts (peace deal, rate cut, growth, IPO, price target):
-  - High yes_price = good event LIKELY = BULLISH for S&P 500 (score near 1.0)
-  - Low yes_price = good event UNLIKELY = BEARISH for S&P 500 (score near 0.0)
+  - High yes_price = good event LIKELY = BULLISH for S&P 500
+  - Low yes_price = good event UNLIKELY = BEARISH for S&P 500
 
 Examples:
-- "Will recession happen?" at 7.5% yes → recession unlikely → BULLISH → score: 0.9
-- "Will Fed cut rates?" at 80% yes → rate cut likely → BULLISH → score: 0.8
-- "Will war escalate?" at 60% yes → war likely → BEARISH → score: 0.4
-- "Leaders meet for peace?" at 10% yes → peace unlikely → BEARISH → score: 0.1
-- "Will Bitcoin hit $150K?" at 2.3% yes → unlikely → BEARISH → score: 0.1
-- "OpenAI IPO above $1T?" at 72.5% yes → likely → BULLISH → score: 0.8
-
-Available sectors:
-{sector_list}
+- "Will recession happen?" at 7.5% yes → recession unlikely → BULLISH, impact: 85 (recession is high impact)
+- "Will Fed cut rates?" at 80% yes → rate cut likely → BULLISH, impact: 90 (Fed decisions are very high impact)
+- "Will war escalate?" at 60% yes → war likely → BEARISH, impact: 80 (geopolitical conflict is high impact)
+- "Will Bitcoin hit $150K?" at 2.3% yes → unlikely → BEARISH, impact: 15 (crypto has limited S&P impact)
+- "OpenAI IPO above $1T?" at 72.5% yes → likely → BULLISH, impact: 25 (tech IPO is moderate impact)
 
 Contracts to analyze:
 {contracts_str}
 
 Return a JSON object mapping each contract index to its analysis:
-{{"0": {{"sector": "economic_growth", "sentiment_score": 0.9, "signal": "Bullish"}}, "1": {{"sector": "geopolitical_conflict", "sentiment_score": 0.1, "signal": "Bearish"}}}}
+{{"0": {{"impact_score": 85, "direction": "Bullish"}}, "1": {{"impact_score": 15, "direction": "Bearish"}}}}
 
-Use "unknown" for sector if the contract doesn't fit any sector or doesn't impact S&P 500.
 Return ONLY the JSON object."""
 
         try:
@@ -161,96 +161,101 @@ Return ONLY the JSON object."""
                 json_str = content[start:end]
                 classifications = json.loads(json_str)
                 
-                unknown_count = 0
                 for idx_str, classification in classifications.items():
                     idx = int(idx_str)
                     if 0 <= idx < len(batch):
-                        contract = batch[idx]
-                        sector_id = classification.get("sector", "unknown")
-                        
-                        contract["sector"] = sector_id
-                        contract["sentiment_score"] = float(classification.get("sentiment_score", 0.5))
-                        contract["signal"] = classification.get("signal", "Neutral")
-                        
-                        if sector_id in SECTORS:
-                            grouped[sector_id].append(contract)
-                        else:
-                            unknown_count += 1
-                
-                if unknown_count > 0:
-                    print(f"    Filtered out {unknown_count} irrelevant contracts")
+                        contract = batch[idx].copy()
+                        contract["impact_score"] = int(classification.get("impact_score", 0))
+                        contract["direction"] = classification.get("direction", "Neutral")
+                        scored_contracts.append(contract)
             else:
                 print(f"    Warning: Could not parse LLM response, skipping batch")
         
         except Exception as e:
-            print(f"    Warning: Batch classification failed ({e}), skipping batch")
+            print(f"    Warning: Batch scoring failed ({e}), skipping batch")
     
-    total_classified = sum(len(c) for c in grouped.values())
-    print(f"\n  Classification complete:")
-    print(f"    Total contracts classified: {total_classified} / {len(contracts)}")
-    for sector_id, sector_contracts in grouped.items():
-        if sector_contracts:
-            sector_name = SECTORS[sector_id].name
-            avg_sentiment = sum(c.get("sentiment_score", 0.5) for c in sector_contracts) / len(sector_contracts)
-            print(f"    {sector_name}: {len(sector_contracts)} contracts (avg sentiment: {avg_sentiment:.2f})")
+    print(f"\n  Scoring complete:")
+    print(f"    Total contracts scored: {len(scored_contracts)} / {len(contracts)}")
     
-    return grouped
+    return scored_contracts
 
 
-def classify_contracts_hybrid(contracts: list[dict]) -> dict[str, list[dict]]:
-    """Classify contracts using pure LLM approach.
-    
-    1. Filter out obviously irrelevant contracts (sports, entertainment, etc.)
-    2. LLM classifies remaining contracts into sectors AND determines sentiment
+def get_top_impact_contracts(scored_contracts: list[dict], top_n: int = 5) -> list[dict]:
+    """Get the top N contracts by impact score.
     
     Args:
-        contracts: List of contract dicts to classify
+        scored_contracts: List of contracts with impact_score
+        top_n: Number of top contracts to return
     
     Returns:
-        Dict mapping sector_id to list of contracts in that sector
+        List of top N contracts sorted by impact_score (descending)
+    """
+    sorted_contracts = sorted(scored_contracts, key=lambda c: c.get("impact_score", 0), reverse=True)
+    return sorted_contracts[:top_n]
+
+
+def calculate_average_impact_score(contracts: list[dict]) -> float:
+    """Calculate the average impact score of a list of contracts.
+    
+    Args:
+        contracts: List of contracts with impact_score
+    
+    Returns:
+        Average impact score (0-100)
+    """
+    if not contracts:
+        return 0.0
+    total = sum(c.get("impact_score", 0) for c in contracts)
+    return round(total / len(contracts), 2)
+
+
+def score_contracts(contracts: list[dict]) -> dict[str, Any]:
+    """Main entry point: Score contracts for S&P 500 impact.
+    
+    1. Filter out obviously irrelevant contracts (sports, entertainment, etc.)
+    2. LLM scores remaining contracts for impact (0-100) and direction
+    3. Sort by impact score and get top 5
+    4. Calculate average of top 5
+    
+    Args:
+        contracts: List of contract dicts to score
+    
+    Returns:
+        Dict containing:
+        - all_scored_contracts: All contracts with impact_score and direction
+        - top_contracts: Top 5 contracts by impact score
+        - avg_impact_score: Average impact score of top 5
     """
     relevant_contracts = filter_irrelevant_contracts(contracts)
     
     if not relevant_contracts:
         print("  No relevant contracts after filtering")
-        return {sector_id: [] for sector_id in SECTORS.keys()}
-    
-    print(f"  Using LLM to classify {len(relevant_contracts)} relevant contracts...")
-    try:
-        grouped = classify_contracts_with_llm(relevant_contracts, batch_size=10)
-        return grouped
-    except Exception as e:
-        print(f"  Warning: LLM classification failed ({e})")
-        return {sector_id: [] for sector_id in SECTORS.keys()}
-
-
-def get_sector_summary(grouped_contracts: dict[str, list[dict]]) -> dict[str, Any]:
-    summary = {}
-    
-    for sector_id, contracts in grouped_contracts.items():
-        if sector_id == "unknown" or not contracts:
-            continue
-        
-        sector = get_sector(sector_id)
-        if not sector:
-            continue
-        
-        summary[sector_id] = {
-            "name": sector.name,
-            "contract_count": len(contracts),
-            "total_volume": sum(c.get("volume", 0) for c in contracts),
-            "avg_sentiment_score": sum(c.get("sentiment_score", 0.5) for c in contracts) / len(contracts),
-            "contracts": [
-                {
-                    "id": c.get("id"),
-                    "question": c.get("question"),
-                    "volume": c.get("volume"),
-                    "yes_price": c.get("yes_price"),
-                    "sentiment_score": c.get("sentiment_score", 0.5),
-                    "signal": c.get("signal", "Neutral"),
-                }
-                for c in contracts[:5]
-            ],
+        return {
+            "all_scored_contracts": [],
+            "top_contracts": [],
+            "avg_impact_score": 0.0,
         }
     
-    return summary
+    print(f"  Using LLM to score {len(relevant_contracts)} relevant contracts...")
+    try:
+        scored_contracts = score_contracts_with_llm(relevant_contracts, batch_size=10)
+        top_contracts = get_top_impact_contracts(scored_contracts, top_n=5)
+        avg_impact_score = calculate_average_impact_score(top_contracts)
+        
+        print(f"\n  Top 5 impact contracts:")
+        for i, contract in enumerate(top_contracts, 1):
+            print(f"    {i}. [{contract.get('impact_score')}] {contract.get('direction')} - {contract.get('question', '')[:60]}...")
+        print(f"\n  Average impact score (top 5): {avg_impact_score}")
+        
+        return {
+            "all_scored_contracts": scored_contracts,
+            "top_contracts": top_contracts,
+            "avg_impact_score": avg_impact_score,
+        }
+    except Exception as e:
+        print(f"  Warning: LLM scoring failed ({e})")
+        return {
+            "all_scored_contracts": [],
+            "top_contracts": [],
+            "avg_impact_score": 0.0,
+        }

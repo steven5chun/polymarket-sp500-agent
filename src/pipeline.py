@@ -9,103 +9,66 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from src.agents.discovery_agent import run_discovery
-from src.agents.quant_scorer import run_quant_scoring
-from src.agents.spx_predictor import run_prediction
 from src.prediction_log import log_prediction, get_prediction_count
 from src.market_data import get_realtime_sp500_data, format_market_snapshot
 
 
 BANNER = """
 ============================================================
-  Polymarket Macro Sentiment S&P 500 Predictor AI Agent
-  Sector-Based Analysis (All Contracts)
+  Polymarket S&P 500 Impact Score Agent
+  Track prediction market impact vs S&P 500 price
 ============================================================
 """
 
 
 def run_pipeline(log: bool = True) -> dict:
-    # Capture market snapshot before running prediction
-    print("\n[0/4] Capturing market snapshot...")
+    print(f"\n[1/3] Fetching and scoring Polymarket contracts for S&P 500 impact...")
+    discovery_data = run_discovery()
+    contract_count = discovery_data.get("total_contracts", 0)
+    avg_impact = discovery_data.get("avg_impact_score", 0.0)
+    top_contracts = discovery_data.get("top_contracts", [])
+    print(f"       Scored {contract_count} contracts. Average impact (top 5): {avg_impact}")
+
+    print(f"\n[2/3] Getting current S&P 500 price...")
     market_context = get_realtime_sp500_data()
     print(f"       {format_market_snapshot(market_context)}")
 
-    print(f"\n[1/4] Discovery Agent: Fetching and classifying all Polymarket contracts...")
-    discovery_data = run_discovery()
-    contract_count = len(discovery_data.get("all_contracts", []))
-    sector_count = len(discovery_data.get("sector_summary", {}))
-    print(f"       Found {contract_count} contracts across {sector_count} sectors.")
-
-    print(f"\n[2/4] Quant Agent: Scoring sector sentiment vectors...")
-    grouped_contracts = discovery_data.get("grouped_contracts", {})
-    quant_data = run_quant_scoring(discovery_data, grouped_contracts)
-    sentiment_score = quant_data.get("aggregate", {}).get("sentiment_score", "N/A")
-    stress = quant_data.get("aggregate", {}).get("stress_coefficient", "N/A")
-    print(f"       Aggregate Sentiment: {sentiment_score} | Stress: {stress}")
-
-    print(f"\n[3/4] Predictor Agent: Generating S&P 500 forecast...")
-    prediction = run_prediction(discovery_data, quant_data)
-    direction = prediction.get("sp500_direction_7d", "Unknown")
-    confidence = prediction.get("confidence_level", "Unknown")
-    print(f"       Direction: {direction} | Confidence: {confidence}")
-
-    if log and direction != "Unknown":
-        # Flatten grouped contracts into a list with sector assignments
-        contracts_data = []
-        for sector_id, sector_contracts in grouped_contracts.items():
-            for contract in sector_contracts:
-                contract_with_sector = contract.copy()
-                contract_with_sector["sector"] = sector_id
-                contracts_data.append(contract_with_sector)
-        
+    if log and contract_count > 0:
+        print(f"\n[3/3] Logging prediction...")
         log_prediction(
-            direction=direction,
-            confidence=confidence,
-            sentiment_score=float(sentiment_score) if sentiment_score != "N/A" else 0.5,
-            stress_coefficient=float(stress) if stress != "N/A" else 0.0,
-            sector_breakdown=prediction.get("sector_breakdown", {}),
+            avg_impact_score=avg_impact,
+            top_contracts=top_contracts,
             market_context=market_context,
-            market_regime=prediction.get("market_regime"),
-            driving_sectors=prediction.get("driving_sectors", []),
-            rationale=prediction.get("rationale"),
-            contracts_data=contracts_data,
+            contracts_data=discovery_data.get("all_scored_contracts", []),
         )
         total_logged = get_prediction_count()
-        print(f"\n       Prediction logged (total: {total_logged})")
+        print(f"       Prediction logged (total: {total_logged})")
 
-    # Include market context in result
-    prediction["market_snapshot"] = market_context
-    return prediction
+    return {
+        "avg_impact_score": avg_impact,
+        "top_contracts": top_contracts,
+        "market_snapshot": market_context,
+        "total_contracts": contract_count,
+    }
 
 
-def format_sector_breakdown(sector_breakdown: dict) -> str:
-    if not sector_breakdown:
-        return "No sector data available."
+def format_top_contracts(top_contracts: list) -> str:
+    if not top_contracts:
+        return "No top contracts available."
     
     lines = []
-    for sector_id, data in sorted(
-        sector_breakdown.items(),
-        key=lambda x: x[1].get("spx_weight", 0),
-        reverse=True
-    ):
-        name = data.get("name", sector_id)
-        sentiment = data.get("sentiment_score", 0.5)
-        signal = data.get("signal", "Neutral")
-        count = data.get("contract_count", 0)
-        weight = data.get("spx_weight", 0.5)
-        
-        sentiment_bar = "█" * int(sentiment * 10) + "░" * (10 - int(sentiment * 10))
-        
-        lines.append(
-            f"  {name:<25} | {sentiment_bar} {sentiment:.2f} | {signal:<10} | "
-            f"Contracts: {count} | Weight: {weight:.2f}"
-        )
+    for i, contract in enumerate(top_contracts, 1):
+        impact = contract.get("impact_score", 0)
+        direction = contract.get("direction", "Neutral")
+        question = contract.get("question", "")[:70]
+        lines.append(f"  {i}. [{impact:3d}] {direction:<10} | {question}")
     
     return "\n".join(lines)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Polymarket S&P 500 Prediction Pipeline - Fetches all contracts and classifies via AI"
+        description="Polymarket S&P 500 Impact Score Agent"
     )
     parser.add_argument(
         "--no-log",
@@ -116,53 +79,29 @@ def main():
     args = parser.parse_args()
     
     print(BANNER)
-    print("\nFetching all Polymarket contracts and classifying via AI agent...")
+    print("\nFetching all Polymarket contracts and scoring for S&P 500 impact...")
     print("-" * 60)
 
     try:
         result = run_pipeline(log=not args.no_log)
         
         print("\n" + "=" * 60)
-        print("  FINAL PREDICTION REPORT")
+        print("  IMPACT SCORE REPORT")
         print("=" * 60)
         
-        # Display market context
         market_snapshot = result.get("market_snapshot", {})
         if market_snapshot:
-            print("\nMarket Context at Prediction:")
+            print("\nS&P 500 Market Data:")
             print(f"  {format_market_snapshot(market_snapshot)}")
         
-        print(f"\nMarket Regime: {result.get('market_regime', 'Unknown')}")
-        print(f"S&P 500 Direction (7d): {result.get('sp500_direction_7d', 'Unknown')}")
-        print(f"Confidence Level: {result.get('confidence_level', 'Unknown')}")
-        print(f"Aggregate Sentiment: {result.get('sentiment_score', 'N/A')}")
+        print(f"\nAverage Impact Score (Top 5): {result.get('avg_impact_score', 0)}")
         
         print("\n" + "-" * 60)
-        print("  SECTOR BREAKDOWN")
+        print("  TOP 5 HIGHEST IMPACT CONTRACTS")
         print("-" * 60)
-        sector_breakdown = result.get("sector_breakdown", {})
-        print(format_sector_breakdown(sector_breakdown))
-        
-        print("\n" + "-" * 60)
-        print("  DRIVING SECTORS")
-        print("-" * 60)
-        driving = result.get("driving_sectors", [])
-        if driving:
-            for sector in driving:
-                print(f"  - {sector}")
-        else:
-            print("  No dominant sectors identified.")
-        
-        print("\n" + "-" * 60)
-        print("  RATIONALE")
-        print("-" * 60)
-        print(result.get("rationale", "No rationale available."))
+        print(format_top_contracts(result.get("top_contracts", [])))
         
         print("\n" + "=" * 60)
-        print("  FULL JSON OUTPUT")
-        print("=" * 60)
-        print(json.dumps(result, indent=2))
-        print("=" * 60)
         
     except Exception as e:
         print(f"\nPipeline error: {e}")

@@ -1,13 +1,12 @@
 """
-Regenerate detail.csv using the new pure LLM logic.
+Regenerate detail.csv using the impact scoring logic.
 """
 
 import csv
 from datetime import datetime, timezone
 from pathlib import Path
 
-from src.agents.sector_classifier import classify_contracts_hybrid
-from src.agents.quant_scorer import compute_all_sector_sentiments
+from src.agents.sector_classifier import score_contracts
 from src.prediction_log import get_detail_csv, get_detail_headers, generate_prediction_id
 
 
@@ -46,11 +45,9 @@ def main():
         print("No contracts to process")
         return
     
-    print(f"\nClassifying {len(contracts)} contracts with pure LLM...")
-    grouped_contracts = classify_contracts_hybrid(contracts)
-    
-    print(f"\nComputing sector sentiments...")
-    sector_sentiments = compute_all_sector_sentiments(grouped_contracts)
+    print(f"\nScoring {len(contracts)} contracts for S&P 500 impact...")
+    scoring_result = score_contracts(contracts)
+    scored_contracts = scoring_result.get("all_scored_contracts", [])
     
     timestamp = datetime.now(timezone.utc).isoformat()
     prediction_id = generate_prediction_id(timestamp)
@@ -62,30 +59,20 @@ def main():
         writer = csv.DictWriter(f, fieldnames=get_detail_headers())
         writer.writeheader()
         
-        for sector_id, sector_contracts in grouped_contracts.items():
-            if sector_id == "unknown" or not sector_contracts:
-                continue
-            
-            sector_data = sector_sentiments.get(sector_id, {})
-            
-            for contract in sector_contracts:
-                detail_row = {
-                    "prediction_id": prediction_id,
-                    "timestamp": timestamp,
-                    "contract_id": contract.get("id", ""),
-                    "contract_question": contract.get("question", ""),
-                    "contract_volume": contract.get("volume", 0),
-                    "contract_yes_price": contract.get("yes_price", 0),
-                    "contract_sentiment_score": contract.get("sentiment_score", 0.5),
-                    "contract_signal": contract.get("signal", "Neutral"),
-                    "sector_id": sector_id,
-                    "sector_sentiment_score": sector_data.get("sentiment_score", ""),
-                    "sector_signal": sector_data.get("signal", ""),
-                }
-                writer.writerow(detail_row)
+        for contract in scored_contracts:
+            detail_row = {
+                "prediction_id": prediction_id,
+                "timestamp": timestamp,
+                "contract_id": contract.get("id", ""),
+                "contract_question": contract.get("question", ""),
+                "contract_volume": contract.get("volume", 0),
+                "contract_yes_price": contract.get("yes_price", 0),
+                "impact_score": contract.get("impact_score", 0),
+                "direction": contract.get("direction", "Neutral"),
+            }
+            writer.writerow(detail_row)
     
-    total_written = sum(len(c) for c in grouped_contracts.values())
-    print(f"\nDone! Wrote {total_written} contracts to {detail_csv}")
+    print(f"\nDone! Wrote {len(scored_contracts)} contracts to {detail_csv}")
     print(f"Prediction ID: {prediction_id}")
 
 

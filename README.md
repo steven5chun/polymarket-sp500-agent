@@ -1,6 +1,6 @@
-# Polymarket Macro Sentiment S&P 500 Predictor AI Agent
+# Polymarket S&P 500 Impact Score Agent
 
-An autonomous multi-agent framework that fetches all active Polymarket contracts, classifies them into 10 macro sectors via AI, and predicts short-term directional movement for the **S&P 500 ($SPX)**.
+An autonomous framework that fetches all active Polymarket contracts, uses LLM to score each contract's potential impact on S&P 500 movement, and tracks the relationship between prediction market impact scores and S&P 500 price over time.
 
 ---
 
@@ -10,21 +10,15 @@ This project leverages the **"Wisdom of the Crowds"** by tracking [prediction ma
 
 1. Fetches **all active Polymarket contracts** (volume > $50K OR liquidity > $50K)
 2. Caches contracts to `data/polymarket-contracts.csv` (refreshed daily)
-3. LLM classifies each contract into one of 10 macro sectors AND determines sentiment score (0.0-1.0) and signal (Bullish/Bearish/Neutral)
-4. Contracts not fitting any sector are discarded
-5. Aggregates LLM-provided sentiment scores per sector using volume-weighted averaging
-6. Generates a 7-day directional S&P 500 forecast
-7. Logs predictions across 3 CSV files
+3. LLM scores each contract's **impact on S&P 500** (0-100) and **direction** (Bullish/Bearish/Neutral)
+4. Sorts contracts by impact score and selects the **top 5 highest impact** contracts
+5. Calculates the **average impact score** of the top 5
+6. Captures the **current S&P 500 price**
+7. Logs predictions to CSV files for trend analysis
 
 ### Architecture
 
 ```text
-┌──────────────────────────────────────┐
-│  0. Market Snapshot                  │  Capture real-time S&P 500 data
-│     (yfinance)                       │  Price, daily/weekly change, 50d MA
-└──────────────┬───────────────────────┘
-               │
-               ▼
 ┌──────────────────────────────────────┐
 │  1. Fetch All Contracts              │  Fetch ALL active Polymarket contracts
 │     (data_harvester)                 │  Filter: volume > $50K OR liquidity > $50K
@@ -33,29 +27,24 @@ This project leverages the **"Wisdom of the Crowds"** by tracking [prediction ma
                │
                ▼
 ┌──────────────────────────────────────┐
-│  2. AI Sector Classifier             │  Pure LLM: determines sector,
-│     (sector_classifier)              │  sentiment_score, and signal
-│                                      │  for each contract
+│  2. AI Impact Scorer                 │  LLM reads each contract and scores:
+│     (sector_classifier)              │  - Impact score (0-100)
+│                                      │  - Direction (Bullish/Bearish/Neutral)
+│                                      │  Sort top 5, calculate average
 └──────────────┬───────────────────────┘
                │
                ▼
 ┌──────────────────────────────────────┐
-│  3. Quant Scorer                     │  Aggregates LLM-provided sentiment
-│     (Pure LLM)                       │  scores + stress coefficients
+│  3. Get S&P 500 Price                │  Capture real-time S&P 500 data
+│     (market_data / yfinance)         │  Price, daily/weekly change
 └──────────────┬───────────────────────┘
                │
                ▼
 ┌──────────────────────────────────────┐
-│  4. S&P 500 Predictor                │  Directional forecast +
-│     (Deterministic + LLM)            │  sector breakdown + rationale
-└──────────────┬───────────────────────┘
-               │
-               ▼
-┌──────────────────────────────────────┐
-│  5. Log to 3 CSV Files               │
-│     predictions.csv  - overall + S&P │
-│     sectors.csv      - sector scores │
-│     detail.csv       - each contract │
+│  4. Log to CSV Files                 │
+│     predictions.csv - avg score +    │
+│                       top 5 + S&P    │
+│     detail.csv      - each contract  │
 └──────────────────────────────────────┘
 ```
 
@@ -65,13 +54,13 @@ This project leverages the **"Wisdom of the Crowds"** by tracking [prediction ma
 
 - **Full Market Coverage** - Fetches ALL active Polymarket contracts (no search query needed), ensuring no relevant signal is missed
 - **Daily Contract Cache** - Contracts cached to `data/polymarket-contracts.csv`, refreshed once per day to avoid redundant API calls
-- **Pure LLM Classification & Sentiment** - LLM reads question + description + yes_price to determine sector, sentiment score, and signal for each contract
-- **Sector-Based Analysis** - Each sector weighted by historical S&P 500 impact
+- **LLM Impact Scoring** - LLM reads each contract's question + description and scores S&P 500 impact magnitude (0-100) and direction (Bullish/Bearish/Neutral)
+- **Top 5 Focus** - Identifies the 5 highest-impact contracts and calculates their average score
 - **Volume/Liquidity Filtering** - Only contracts with volume > $50K OR liquidity > $50K are considered
 - **Contract Expiry Filtering** - Removes expired and not-yet-active contracts
 - **Multi-LLM Support** - Configurable backend: OpenAI, Qwen (Alibaba Cloud), or Ollama (local)
-- **Real-Time Market Context** - Captures S&P 500 price, daily/weekly changes, and 50-day MA with each prediction
-- **3-File CSV Logging** - Clean separation: predictions, sectors, and contract details
+- **Real-Time Market Context** - Captures S&P 500 price and daily/weekly changes with each prediction
+- **Trend Tracking** - CSV output designed for plotting impact score vs S&P 500 price over time
 - **Zero-Account Data** - Polymarket API requires no authentication
 
 ---
@@ -132,12 +121,12 @@ cd prediction-market-mcp && npm install && npm run build
 
 ### Run a Prediction
 
-No query needed - the system fetches ALL Polymarket contracts and classifies them via AI.
+No query needed - the system fetches ALL Polymarket contracts and scores them via AI.
 
 ```bash
 source .venv/bin/activate
 
-# Run prediction (fetches all contracts, classifies, predicts)
+# Run prediction (fetches all contracts, scores impact, logs)
 python -m src.pipeline
 
 # Run without logging the prediction
@@ -158,7 +147,7 @@ python -m scripts.run_daily_predictions --quiet
 
 | Command | Description |
 |---------|-------------|
-| `python -m src.pipeline` | Run prediction (all contracts) |
+| `python -m src.pipeline` | Run prediction (all contracts, score impact) |
 | `python -m src.pipeline --no-log` | Run prediction without logging |
 | `python -m scripts.run_daily_predictions` | Run daily prediction |
 
@@ -171,58 +160,40 @@ python -m scripts.run_daily_predictions --quiet
 1. **Fetch All Contracts** - Polymarket Gamma API returns all active markets
 2. **Filter** - Keep only contracts with volume > $50K OR liquidity > $50K and valid (non-expired) dates
 3. **Cache** - Save to `data/polymarket-contracts.csv` (reused for same-day runs)
-4. **Pure LLM Classification** - LLM determines sector, sentiment_score (0.0-1.0), and signal for each contract
-5. **Discard Unmatched** - Contracts not fitting any sector are removed
-6. **Score** - Aggregate LLM-provided sentiment scores per sector using volume-weighted averaging
-7. **Predict** - Generate 7-day S&P 500 directional forecast
-8. **Log** - Save to 3 CSV files (predictions, sectors, detail)
+4. **LLM Impact Scoring** - LLM determines impact score (0-100) and direction (Bullish/Bearish/Neutral) for each contract
+5. **Sort & Average** - Sort by impact score, select top 5, calculate average
+6. **Get S&P 500 Price** - Capture current S&P 500 price and changes
+7. **Log** - Save to 2 CSV files (predictions, detail)
 
 ---
 
-## Output: 3 CSV Files
+## Output: 2 CSV Files
 
 All logs are stored in `data/` as CSV files. No `query` column - the system processes all contracts.
 
 ### 1. `data/predictions.csv` - Overall Predictions
 
-One row per prediction run. Contains overall prediction, all 10 sector scores, and real-time S&P 500 data.
+One row per prediction run. Contains average impact score, top 5 contracts, and S&P 500 data.
 
 | Column | Description |
 |--------|-------------|
 | `prediction_id` | Unique ID (e.g., `pred_20261004_339`) |
 | `timestamp` | When prediction was made |
-| `direction` | Bullish / Bearish / Neutral |
-| `confidence` | High / Medium / Low |
-| `sentiment_score` | Aggregate sentiment (0.0 to 1.0) |
-| `stress_coefficient` | Aggregate stress (0.0 to 1.0) |
-| `market_regime` | LLM-described market regime |
-| `driving_sectors` | Comma-separated sector IDs |
+| `avg_impact_score` | Average impact score of top 5 contracts (0-100) |
+| `top1_question` | Highest impact contract question |
+| `top1_impact_score` | Its impact score (0-100) |
+| `top1_direction` | Bullish / Bearish / Neutral |
+| `top2_question` / `top2_impact_score` / `top2_direction` | 2nd highest |
+| `top3_question` / `top3_impact_score` / `top3_direction` | 3rd highest |
+| `top4_question` / `top4_impact_score` / `top4_direction` | 4th highest |
+| `top5_question` / `top5_impact_score` / `top5_direction` | 5th highest |
 | `sp500_price` | S&P 500 price at prediction time |
 | `sp500_daily_change_pct` | S&P 500 daily change % |
 | `sp500_weekly_change_pct` | S&P 500 7-day change % |
-| `sp500_distance_from_50d_ma_pct` | Distance from 50-day MA % |
-| `{sector}_score` | Sentiment score per sector (10 columns) |
 
-### 2. `data/sectors.csv` - Sector-Level Aggregations
+### 2. `data/detail.csv` - Individual Contract Details
 
-One row per sector per prediction. Contains sector total scores.
-
-| Column | Description |
-|--------|-------------|
-| `prediction_id` | Links to predictions.csv |
-| `timestamp` | When prediction was made |
-| `sector_id` | Sector identifier (e.g., `economic_growth`) |
-| `sector_name` | Human-readable name |
-| `sentiment_score` | Sector sentiment (0.0 to 1.0) |
-| `stress_coefficient` | Sector stress (0.0 to 1.0) |
-| `signal` | Bullish / Bearish / Neutral |
-| `contract_count` | Number of contracts in sector |
-| `total_volume` | Total contract volume in USD |
-| `spx_weight` | Sector weight in aggregate (0.0 to 1.0) |
-
-### 3. `data/detail.csv` - Individual Contract Details
-
-One row per Polymarket contract. Contains classification and scores.
+One row per Polymarket contract. Contains impact score and direction.
 
 | Column | Description |
 |--------|-------------|
@@ -232,13 +203,10 @@ One row per Polymarket contract. Contains classification and scores.
 | `contract_question` | The contract question text |
 | `contract_volume` | Trading volume in USD |
 | `contract_yes_price` | Implied probability (0.0 to 1.0) |
-| `contract_sentiment_score` | LLM-determined sentiment (0.0 to 1.0) |
-| `contract_signal` | Bullish / Bearish / Neutral |
-| `sector_id` | Which sector this contract belongs to |
-| `sector_sentiment_score` | Sentiment of the assigned sector |
-| `sector_signal` | Signal of the assigned sector |
+| `impact_score` | LLM-determined S&P 500 impact (0-100) |
+| `direction` | Bullish / Bearish / Neutral |
 
-### 4. `data/polymarket-contracts.csv` - Contract Cache
+### 3. `data/polymarket-contracts.csv` - Contract Cache
 
 All active Polymarket contracts with volume > $50K OR liquidity > $50K. Overwritten daily.
 
@@ -254,25 +222,6 @@ All active Polymarket contracts with volume > $50K OR liquidity > $50K. Overwrit
 | `yes_price` | Current yes price |
 | `start_date` | Contract start date |
 | `end_date` | Contract end date |
-
----
-
-## Sector Taxonomy
-
-| Sector | Weight | Description |
-|--------|--------|-------------|
-| Economic Growth | 1.00 | GDP, employment, recession, economic indicators |
-| Monetary Policy | 0.95 | Fed decisions, interest rates, inflation, FOMC |
-| Financial System | 0.95 | Banking stability, credit markets, financial crises |
-| Geopolitical Conflict | 0.90 | Wars, military conflicts, sanctions, international tensions |
-| US Political Stability | 0.85 | Government dysfunction, elections, policy uncertainty |
-| Energy & Commodities | 0.80 | Oil, gas, commodities, supply chains |
-| Trade & Regulatory | 0.80 | Tariffs, trade wars, regulation, antitrust |
-| Public Health | 0.75 | Pandemics, health crises, disease outbreaks |
-| Technology & Cyber | 0.70 | Cyberattacks, tech infrastructure, AI developments |
-| Stock Prediction | 0.65 | Stock/crypto price predictions, market confidence indicators |
-
-Weights reflect each sector's historical correlation with S&P 500 directional movement. Contracts that don't fit any sector are discarded. See [polymarket-discovery.md](polymarket-discovery.md) for detailed weight methodology.
 
 ---
 
@@ -297,22 +246,19 @@ Qwen's API has content moderation that may block political/geopolitical content 
 │   └── mcp.json                        # MCP server binding configuration
 ├── data/
 │   ├── polymarket-contracts.csv        # Daily contract cache (overwritten daily)
-│   ├── predictions.csv                 # Overall predictions with S&P 500 data
-│   ├── sectors.csv                     # Sector-level aggregations
-│   └── detail.csv                      # Individual contract details
+│   ├── predictions.csv                 # Average impact score + top 5 + S&P 500 data
+│   └── detail.csv                      # Individual contract impact scores
 ├── scripts/
-│   └── run_daily_predictions.py        # Run daily prediction
+│   ├── run_daily_predictions.py        # Run daily prediction
+│   └── regenerate_detail_csv.py        # Regenerate detail.csv from cache
 ├── src/
 │   ├── agents/
 │   │   ├── data_harvester.py           # Polymarket API client + caching
-│   │   ├── discovery_agent.py          # CrewAI agent (fetches all, no query)
-│   │   ├── sector_classifier.py        # Pure LLM sector classification + sentiment
-│   │   ├── quant_scorer.py             # Aggregates LLM sentiment scores + stress
-│   │   └── spx_predictor.py            # Directional prediction + rationale
-│   ├── sectors.py                      # 10-sector taxonomy + weights
+│   │   ├── discovery_agent.py          # Fetches all contracts
+│   │   └── sector_classifier.py        # LLM impact scoring (0-100) + direction
 │   ├── llm.py                          # LLM provider factory
 │   ├── market_data.py                  # Real-time S&P 500 data fetcher
-│   ├── prediction_log.py               # CSV logging (3 files)
+│   ├── prediction_log.py               # CSV logging (2 files)
 │   └── pipeline.py                     # Main entry point
 ├── .env.example                        # Environment variable template
 ├── requirements.txt                    # Python dependencies

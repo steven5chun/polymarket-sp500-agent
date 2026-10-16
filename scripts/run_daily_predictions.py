@@ -56,16 +56,15 @@ def run_daily_prediction(verbose: bool = True) -> dict:
     
     try:
         if verbose:
-            print("\nFetching all Polymarket contracts and classifying via AI...")
+            print("\nFetching all Polymarket contracts and scoring for S&P 500 impact...")
             print("-" * 70)
         
         result = run_pipeline(log=True)
         
         if verbose:
-            print(f"\n✓ Prediction logged successfully")
-            print(f"  Direction: {result.get('sp500_direction_7d')}")
-            print(f"  Confidence: {result.get('confidence_level')}")
-            print(f"  Sentiment: {result.get('sentiment_score')}")
+            print(f"\n Prediction logged successfully")
+            print(f"  Avg Impact Score: {result.get('avg_impact_score')}")
+            print(f"  Total Contracts: {result.get('total_contracts')}")
     
     except Exception as e:
         error = str(e)
@@ -88,9 +87,8 @@ def run_daily_prediction(verbose: bool = True) -> dict:
     }
     
     if result:
-        summary["direction"] = result.get("sp500_direction_7d")
-        summary["confidence"] = result.get("confidence_level")
-        summary["sentiment_score"] = result.get("sentiment_score")
+        summary["avg_impact_score"] = result.get("avg_impact_score")
+        summary["total_contracts"] = result.get("total_contracts")
     
     if error:
         summary["error"] = error
