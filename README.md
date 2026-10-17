@@ -348,6 +348,80 @@ All active Polymarket contracts with volume > $50K OR liquidity > $50K. Overwrit
 | `start_date` | Contract start date |
 | `end_date` | Contract end date |
 
+### Example Output
+
+**Console Output:**
+```
+============================================================
+  Polymarket S&P 500 Indicator
+  Leading indicator using prediction markets to forecast S&P 500
+============================================================
+
+Fetching all Polymarket contracts and scoring for S&P 500 impact...
+------------------------------------------------------------
+
+[1/3] Fetching and scoring Polymarket contracts for S&P 500 impact...
+Fetching all contracts and scoring for S&P 500 impact...
+Fetching all active markets from Polymarket...
+    Fetching low-volume markets...
+    Low-volume: 2100 markets
+    Fetching high-volume markets...
+    High-volume: +2100 new markets
+    Fetching recent markets...
+    Recent: +2018 new markets
+    Total unique markets: 6218
+  Found 6218 total markets
+  After liquidity filter (>=50000): 221 markets
+  After expiry filter: 215 markets
+  Extracted features for 215 contracts
+Fetched 215 contracts
+Scoring contracts for S&P 500 impact...
+  Filtering 215 contracts by consensus (majority consensus)...
+  After consensus filter: 171 contracts
+  Using LLM to classify 171 contracts as economic/financial...
+  Classifying batch 1/18 (10 contracts)...
+  ...
+  Classification complete: 9 / 171 are economic/financial
+  Scoring 9 economic/financial contracts...
+  Scoring batch 1/1 (9 contracts)...
+
+  Scoring complete:
+    Total contracts scored: 9 / 9
+
+  Market Direction Prediction:
+    Predicted Direction: Bullish
+    Confidence: 71.1%
+    Bullish Impact: 320 | Bearish Impact: 130 | Neutral Impact: 60
+       Scored 9 contracts.
+
+[2/3] Getting current S&P 500 price...
+       S&P 500: $7,659.44 (-1.09% today, -1.36% this week) | vs 50d MA: -0.61% | closed
+
+[3/3] Logging prediction...
+       Prediction logged (total: 1)
+
+============================================================
+  MARKET DIRECTION REPORT
+============================================================
+
+Market Direction Prediction:
+  Predicted Direction: Bullish
+  Confidence: 71.1%
+  Bullish Impact: 320 | Bearish Impact: 130 | Neutral Impact: 60
+  Contracts Analyzed: 9
+
+S&P 500 Market Data:
+  S&P 500: $7,659.44 (-1.09% today, -1.36% this week) | vs 50d MA: -0.61% | closed
+
+============================================================
+```
+
+**Example detail.csv rows:**
+- [detail.csv](data/detail.csv)
+
+**Example predictions.csv row:**
+- [predictions.csv](data/predictions.csv)
+
 ---
 
 ## LLM Provider Options
