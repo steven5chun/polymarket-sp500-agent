@@ -1,8 +1,8 @@
 import json
 from typing import Any
 
-from src.agents.data_harvester import fetch_and_cache_contracts
-from src.agents.sector_classifier import score_contracts
+from src.agents.data_filter import fetch_and_cache_contracts
+from src.agents.data_transformation import score_contracts
 
 
 def run_discovery() -> dict[str, Any]:
@@ -11,9 +11,8 @@ def run_discovery() -> dict[str, Any]:
     Returns:
         Dict containing:
         - all_scored_contracts: All contracts with impact_score and direction
-        - top_contracts: Top 5 contracts by impact score
-        - avg_impact_score: Average impact score of top 5
         - total_contracts: Total number of scored contracts
+        - market_prediction: Predicted market direction with confidence
     """
     print("Fetching all contracts and scoring for S&P 500 impact...")
     
@@ -25,7 +24,6 @@ def run_discovery() -> dict[str, Any]:
     
     return {
         "all_scored_contracts": scoring_result.get("all_scored_contracts", []),
-        "top_contracts": scoring_result.get("top_contracts", []),
-        "avg_impact_score": scoring_result.get("avg_impact_score", 0.0),
         "total_contracts": len(scoring_result.get("all_scored_contracts", [])),
+        "market_prediction": scoring_result.get("market_prediction", {}),
     }

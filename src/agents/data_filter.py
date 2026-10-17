@@ -12,81 +12,6 @@ GAMMA_API_URL = os.getenv("GAMMA_API_URL", "https://gamma-api.polymarket.com")
 CLOB_API_URL = os.getenv("CLOB_API_URL", "https://clob.polymarket.com")
 MIN_LIQUIDITY_USD = int(os.getenv("MIN_LIQUIDITY_USD", "10000"))
 
-SECTOR_KEYWORDS = {
-    "economic_growth": [
-        "gdp", "recession", "unemployment", "jobs", "employment",
-        "economic growth", "inflation", "deflation", "consumer spending",
-        "retail sales", "manufacturing", "pmi", "industrial production",
-        "housing starts", "construction", "business investment",
-        "nonfarm", "payroll", "economic",
-    ],
-    "monetary_policy": [
-        "fed", "federal reserve", "interest rate", "rate cut", "rate hike",
-        "monetary policy", "powell", "fomc", "quantitative easing", "qe",
-        "quantitative tightening", "qt", "inflation target", "dollar",
-        "currency", "central bank", "treasury yield", "bond yield",
-    ],
-    "geopolitical_conflict": [
-        "war", "conflict", "military", "invasion", "attack", "missile",
-        "nuclear", "ukraine", "russia", "middle east", "israel", "palestine",
-        "iran", "china taiwan", "north korea", "ceasefire", "peace deal",
-        "sanctions", "nato",
-    ],
-    "us_political_stability": [
-        "trump", "biden", "election", "president", "congress", "senate",
-        "house", "democrat", "republican", "government shutdown",
-        "debt ceiling", "impeachment", "supreme court", "legislation",
-        "bill", "vote", "poll", "approval rating",
-    ],
-    "energy_commodities": [
-        "oil", "crude", "brent", "wti", "gas", "energy", "opec",
-        "commodity", "gold", "silver", "copper", "steel", "agriculture",
-        "wheat", "corn", "soybean", "food prices", "petroleum",
-    ],
-    "stock_prediction": [
-        "market cap", "bitcoin", "btc", "ethereum", "eth", "crypto",
-        "stock price", "share price", "ipo", "public offering",
-        "hit $", "reach $", "above $", "over $",
-        "tesla", "apple", "microsoft", "nvidia", "amazon", "google",
-        "sp500", "s&p 500", "nasdaq", "dow jones",
-    ],
-    "financial_system": [
-        "bank", "banking", "credit", "debt", "default", "bond", "treasury",
-        "yield", "spread", "liquidity", "financial crisis", "bankruptcy",
-        "systemic risk", "contagion",
-    ],
-    "technology_cyber": [
-        "cyber", "hack", "data breach", "ransomware", "tech", "ai",
-        "artificial intelligence", "semiconductor", "chip", "cyberattack",
-        "infrastructure attack", "power grid", "internet outage",
-    ],
-    "public_health": [
-        "pandemic", "virus", "covid", "outbreak", "epidemic", "health",
-        "disease", "vaccine", "lockdown", "quarantine", "who", "cdc",
-    ],
-    "trade_regulatory": [
-        "tariff", "trade war", "sanctions", "embargo", "import", "export",
-        "customs", "trade deal", "us china", "regulation", "antitrust",
-        "monopoly", "sec", "compliance",
-    ],
-}
-
-BAD_EVENT_KEYWORDS = [
-    "recession", "default", "crisis", "invasion", "war", "attack",
-    "shutdown", "impeach", "bankruptcy", "pandemic", "hurricane",
-    "disaster", "hack", "cyberattack", "outbreak", "unemployment reach",
-    "inflation reach", "hit $", "crash", "collapse", "fail", "out",
-    "win the", "nomination", "presidential",
-]
-
-GOOD_EVENT_KEYWORDS = [
-    "growth", "rate cut", "ceasefire", "peace", "bipartisan", "passed",
-    "innovation", "containment", "vaccine", "trade deal", "deregulation",
-    "beat", "exceed", "greater than", "above", "best performance",
-    "reach", "between", "or higher", "or lower", "or greater",
-]
-
-
 def fetch_all_markets(max_markets: int = 10000) -> list[dict]:
     """Fetch all active markets from Polymarket using multi-segment strategy.
 
@@ -200,79 +125,6 @@ def fetch_all_markets(max_markets: int = 10000) -> list[dict]:
     return result
 
 
-def score_relevance(market: dict, query: str) -> int:
-    """Score how relevant a market is to the user's query.
-
-    Returns the number of keyword matches across the market's question
-    and description. A score of 0 means the contract is unrelated.
-    """
-    text = f"{market.get('question', '')} {market.get('description', '')}".lower()
-    query_words = [w for w in query.lower().split() if len(w) >= 3]
-
-    score = 0
-    for word in query_words:
-        if word in text:
-            score += 1
-
-    for sector_id, keywords in SECTOR_KEYWORDS.items():
-        for kw in keywords:
-            if kw in text:
-                for qw in query_words:
-                    if qw in kw or kw in qw:
-                        score += 2
-
-    return score
-
-
-def filter_by_relevance(markets: list[dict], query: str, min_score: int = 1) -> list[dict]:
-    """Filter markets to only include those relevant to the query."""
-    scored = []
-    for market in markets:
-        score = score_relevance(market, query)
-        if score >= min_score:
-            market["_relevance_score"] = score
-            scored.append(market)
-
-    scored.sort(key=lambda m: (-m["_relevance_score"], -float(m.get("volume", 0) or 0)))
-    return scored
-
-
-def search_markets(query: str, limit: int = 20) -> list[dict]:
-    """Search Polymarket markets by fetching all and filtering client-side."""
-    all_markets = fetch_all_markets()
-    relevant = filter_by_relevance(all_markets, query)
-    return relevant[:limit]
-
-
-def search_events(query: str, limit: int = 10) -> list[dict]:
-    params = {
-        "closed": "false",
-        "limit": limit,
-        "tag": query,
-    }
-    response = requests.get(f"{GAMMA_API_URL}/events", params=params, timeout=15)
-    if response.status_code == 200:
-        return response.json()
-    params.pop("tag")
-    params["_q"] = query
-    response = requests.get(f"{GAMMA_API_URL}/events", params=params, timeout=15)
-    response.raise_for_status()
-    return response.json()
-
-
-def get_market(market_id: str) -> dict:
-    response = requests.get(f"{GAMMA_API_URL}/markets/{market_id}", timeout=15)
-    response.raise_for_status()
-    return response.json()
-
-
-def get_orderbook(token_id: str) -> dict:
-    params = {"token_id": token_id}
-    response = requests.get(f"{CLOB_API_URL}/book", params=params, timeout=15)
-    response.raise_for_status()
-    return response.json()
-
-
 def get_midpoint(token_id: str) -> Optional[float]:
     try:
         params = {"token_id": token_id}
@@ -280,17 +132,6 @@ def get_midpoint(token_id: str) -> Optional[float]:
         response.raise_for_status()
         data = response.json()
         return float(data.get("mid", 0))
-    except Exception:
-        return None
-
-
-def get_price(token_id: str) -> Optional[float]:
-    try:
-        params = {"token_id": token_id}
-        response = requests.get(f"{CLOB_API_URL}/price", params=params, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        return float(data.get("price", 0))
     except Exception:
         return None
 
@@ -341,6 +182,25 @@ def filter_by_expiry(markets: list[dict]) -> list[dict]:
     return filtered
 
 
+def filter_by_consent(contracts: list[dict]) -> list[dict]:
+    """Filter contracts where market has reached majority consensus.
+    
+    Keep contracts where:
+    - yes_price > CONSENT_YES_HIGH (strong YES consensus) OR
+    - yes_price < CONSENT_YES_LOW (strong NO consensus)
+    
+    Remove contracts where CONSENT_YES_LOW <= yes_price <= CONSENT_YES_HIGH (market uncertain)
+    """
+    high = float(os.getenv("CONSENT_YES_HIGH", "0.70"))
+    low = float(os.getenv("CONSENT_YES_LOW", "0.30"))
+    filtered = []
+    for contract in contracts:
+        yes_price = float(contract.get("yes_price", 0.5) or 0.5)
+        if yes_price > high or yes_price < low:
+            filtered.append(contract)
+    return filtered
+
+
 def extract_market_features(market: dict) -> dict:
     tokens = market.get("clobTokenIds") or market.get("clob_token_ids") or ""
     if isinstance(tokens, str):
@@ -387,25 +247,7 @@ def extract_market_features(market: dict) -> dict:
         "outcome_prices": outcome_prices,
         "token_ids": token_list,
         "active": market.get("active", True),
-        "_relevance_score": market.get("_relevance_score", 0),
     }
-
-
-def harvest_contracts(query: str, limit: int = 20) -> list[dict]:
-    markets = search_markets(query, limit=limit * 3)
-    filtered = filter_by_relevance(markets, query)
-    filtered = filter_by_liquidity(filtered)
-    filtered = filter_by_expiry(filtered)
-
-    features = []
-    for market in filtered[:limit]:
-        try:
-            feature = extract_market_features(market)
-            features.append(feature)
-        except Exception:
-            continue
-
-    return features
 
 
 def fetch_all_active_contracts(min_volume: int = MIN_LIQUIDITY_USD) -> list[dict]:
@@ -492,8 +334,6 @@ def fetch_and_cache_contracts(min_volume: int = 50000) -> list[dict]:
                         contract['yes_price'] = float(contract['yes_price'])
                     if 'no_price' in contract:
                         contract['no_price'] = float(contract['no_price'])
-                    if '_relevance_score' in contract:
-                        contract['_relevance_score'] = int(contract['_relevance_score'])
                     contracts.append(contract)
             
             if cache_date == today:

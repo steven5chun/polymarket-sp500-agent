@@ -6,7 +6,11 @@ import csv
 from datetime import datetime, timezone
 from pathlib import Path
 
-from src.agents.sector_classifier import score_contracts
+from dotenv import load_dotenv
+
+load_dotenv()
+
+from src.agents.data_transformation import score_contracts
 from src.prediction_log import get_detail_csv, get_detail_headers, generate_prediction_id
 
 
@@ -69,6 +73,7 @@ def main():
                 "contract_yes_price": contract.get("yes_price", 0),
                 "impact_score": contract.get("impact_score", 0),
                 "direction": contract.get("direction", "Neutral"),
+                "reason": contract.get("reason", ""),
             }
             writer.writerow(detail_row)
     

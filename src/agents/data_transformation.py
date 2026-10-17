@@ -10,6 +10,7 @@ import json
 from typing import Any
 
 from src.llm import get_llm_object
+from src.agents.data_filter import filter_by_consent
 
 
 SENSITIVE_PATTERNS = [
@@ -21,15 +22,6 @@ SENSITIVE_PATTERNS = [
     r"\b(nuclear war|nuclear attack|nuclear strike)\b",
 ]
 
-IRRELEVANT_PATTERNS = [
-    r"\b(exact score|o/u|over/under|spread|vs\.?|versus)\b",
-    r"\b(will.*win the.*final|championship|super bowl|world series|nba|nfl|mlb|nhl)\b",
-    r"\b(will.*win.*oscar|emmy|grammy|tony|award)\b",
-    r"\b(will.*movie|film|album|song|book)\b.*\b(top|grossing|best)\b",
-    r"\b(will.*date|marry|divorce|engage)\b",
-    r"\b(will.*have.*baby|pregnant|give birth)\b",
-]
-
 
 def sanitize_text(text: str) -> str:
     sanitized = text
@@ -38,34 +30,93 @@ def sanitize_text(text: str) -> str:
     return sanitized
 
 
-def is_irrelevant_contract(contract: dict) -> bool:
-    """Check if a contract is clearly irrelevant to S&P 500 prediction."""
-    question = contract.get("question", "").lower()
-    description = contract.get("description", "").lower()
-    text = f"{question} {description}"
+def classify_economic_financial_with_llm(contracts: list[dict], batch_size: int = 10) -> list[dict]:
+    """Use LLM to classify which contracts are purely economic/financial.
     
-    for pattern in IRRELEVANT_PATTERNS:
-        if re.search(pattern, text, flags=re.IGNORECASE):
-            return True
+    Args:
+        contracts: List of contract dicts
+        batch_size: Number of contracts per LLM call (default: 10)
     
-    return False
+    Returns:
+        List of contracts classified as economic/financial
+    """
+    llm = get_llm_object()
+    economic_contracts = []
+    
+    for i in range(0, len(contracts), batch_size):
+        batch = contracts[i:i + batch_size]
+        batch_num = i // batch_size + 1
+        total_batches = (len(contracts) + batch_size - 1) // batch_size
+        
+        print(f"  Classifying batch {batch_num}/{total_batches} ({len(batch)} contracts)...")
+        
+        contract_texts = []
+        for idx, contract in enumerate(batch):
+            question = contract.get("question", "")
+            description = contract.get("description", "")[:200]
+            contract_texts.append(f"[{idx}] {question}\n    {description}")
+        
+        contracts_str = "\n\n".join(contract_texts)
+        
+        prompt = f"""You are filtering prediction market contracts to identify ONLY those that are purely economic or financial in nature.
 
+Economic/Financial contracts include:
+- Macroeconomic indicators (GDP, unemployment, inflation, PMI, retail sales, housing)
+- Monetary policy (Fed, Bank of England, ECB, interest rates, quantitative easing)
+- Currency markets (EUR/USD, forex, exchange rates)
+- Bond markets (yield curve, credit spreads, treasury yields)
+- Trade indicators (trade balance, tariffs, imports/exports)
+- Housing market (home prices, mortgage rates)
+- Broad market indices (S&P 500, Nasdaq, Dow Jones)
+- Major commodities (oil, gold, silver, copper, agriculture)
 
-def filter_irrelevant_contracts(contracts: list[dict]) -> list[dict]:
-    """Filter out contracts that are clearly irrelevant to S&P 500 prediction."""
-    relevant = []
-    filtered_count = 0
+NOT economic/financial (exclude these):
+- Cryptocurrency price targets (Bitcoin, Ethereum, etc.)
+- Individual company events (IPOs, M&A, CEO changes, market cap)
+- Political events (elections, impeachment, legislation)
+- War/geopolitical conflicts (military strikes, invasions, sanctions)
+- Sports, entertainment, personal events
+- Technology/product launches (unless purely economic indicator)
+
+Examples:
+- "Will US unemployment reach 6.0%?" → YES (economic indicator)
+- "Will federal funds rate be 2.25%?" → YES (monetary policy)
+- "Will WTI Crude Oil hit $65?" → YES (commodity)
+- "Will Bitcoin reach $95,000?" → NO (cryptocurrency)
+- "OpenAI IPO above $1T?" → NO (company-specific)
+- "Stripe acquire PayPal?" → NO (company M&A)
+- "Will recession happen?" → YES (macroeconomic)
+
+For each contract, answer YES if it's purely economic/financial, NO otherwise.
+
+Contracts to classify:
+{contracts_str}
+
+Return a JSON object mapping each index to YES or NO:
+{{"0": "YES", "1": "NO", "2": "YES"}}
+
+Return ONLY the JSON object."""
+
+        try:
+            response = llm.invoke(prompt)
+            content = response.content.strip()
+            
+            start = content.find("{")
+            end = content.rfind("}") + 1
+            if start >= 0 and end > start:
+                json_str = content[start:end]
+                classifications = json.loads(json_str)
+                
+                for idx_str, classification in classifications.items():
+                    idx = int(idx_str)
+                    if 0 <= idx < len(batch):
+                        if classification.upper() == "YES":
+                            economic_contracts.append(batch[idx])
+        except Exception as e:
+            print(f"    Warning: Classification failed ({e}), skipping batch")
     
-    for contract in contracts:
-        if is_irrelevant_contract(contract):
-            filtered_count += 1
-        else:
-            relevant.append(contract)
-    
-    if filtered_count > 0:
-        print(f"  Filtered out {filtered_count} irrelevant contracts (sports, entertainment, etc.)")
-    
-    return relevant
+    print(f"\n  Classification complete: {len(economic_contracts)} / {len(contracts)} are economic/financial")
+    return economic_contracts
 
 
 def score_contracts_with_llm(contracts: list[dict], batch_size: int = 10) -> list[dict]:
@@ -126,6 +177,8 @@ For each contract, determine:
    - "Bearish" = Bad for S&P 500 (recession, war, rate hikes, crisis)
    - "Neutral" = Mixed or unclear impact
 
+3. REASON: Provide a 1-sentence explanation of why this contract's outcome would be Bullish/Bearish/Neutral for S&P 500.
+
 CRITICAL: Consider the yes_price when determining DIRECTION:
 
 For BAD EVENT contracts (recession, war, crisis, unemployment, inflation spike):
@@ -137,17 +190,17 @@ For GOOD EVENT contracts (peace deal, rate cut, growth, IPO, price target):
   - Low yes_price = good event UNLIKELY = BEARISH for S&P 500
 
 Examples:
-- "Will recession happen?" at 7.5% yes → recession unlikely → BULLISH, impact: 85 (recession is high impact)
-- "Will Fed cut rates?" at 80% yes → rate cut likely → BULLISH, impact: 90 (Fed decisions are very high impact)
-- "Will war escalate?" at 60% yes → war likely → BEARISH, impact: 80 (geopolitical conflict is high impact)
-- "Will Bitcoin hit $150K?" at 2.3% yes → unlikely → BEARISH, impact: 15 (crypto has limited S&P impact)
-- "OpenAI IPO above $1T?" at 72.5% yes → likely → BULLISH, impact: 25 (tech IPO is moderate impact)
+- "Will recession happen?" at 7.5% yes → recession unlikely → BULLISH, impact: 85, reason: "Low recession probability signals economic stability and continued corporate earnings growth"
+- "Will Fed cut rates?" at 80% yes → rate cut likely → BULLISH, impact: 90, reason: "Fed rate cuts lower borrowing costs for corporations, boosting profit margins and equity valuations"
+- "Will war escalate?" at 60% yes → war likely → BEARISH, impact: 80, reason: "Geopolitical conflict increases market uncertainty and disrupts global supply chains"
+- "Will Bitcoin hit $150K?" at 2.3% yes → unlikely → BEARISH, impact: 15, reason: "Crypto market has limited direct impact on traditional equity valuations"
+- "OpenAI IPO above $1T?" at 72.5% yes → likely → BULLISH, impact: 25, reason: "Major tech IPOs boost market sentiment and innovation sector valuations"
 
 Contracts to analyze:
 {contracts_str}
 
 Return a JSON object mapping each contract index to its analysis:
-{{"0": {{"impact_score": 85, "direction": "Bullish"}}, "1": {{"impact_score": 15, "direction": "Bearish"}}}}
+{{"0": {{"impact_score": 85, "direction": "Bullish", "reason": "Low recession probability signals economic stability and continued corporate earnings growth"}}, "1": {{"impact_score": 15, "direction": "Bearish", "reason": "Crypto market has limited direct impact on traditional equity valuations"}}}}
 
 Return ONLY the JSON object."""
 
@@ -167,6 +220,7 @@ Return ONLY the JSON object."""
                         contract = batch[idx].copy()
                         contract["impact_score"] = int(classification.get("impact_score", 0))
                         contract["direction"] = classification.get("direction", "Neutral")
+                        contract["reason"] = classification.get("reason", "")
                         scored_contracts.append(contract)
             else:
                 print(f"    Warning: Could not parse LLM response, skipping batch")
@@ -180,42 +234,67 @@ Return ONLY the JSON object."""
     return scored_contracts
 
 
-def get_top_impact_contracts(scored_contracts: list[dict], top_n: int = 5) -> list[dict]:
-    """Get the top N contracts by impact score.
+def predict_market_direction(scored_contracts: list[dict]) -> dict[str, Any]:
+    """Predict overall market direction based on impact-weighted directional sentiment.
     
     Args:
-        scored_contracts: List of contracts with impact_score
-        top_n: Number of top contracts to return
+        scored_contracts: List of contracts with impact_score and direction
     
     Returns:
-        List of top N contracts sorted by impact_score (descending)
+        Dict containing:
+        - predicted_direction: Bullish / Bearish / Neutral
+        - confidence_pct: 0-100% confidence in prediction
+        - bullish_impact_sum: Total impact of bullish contracts
+        - bearish_impact_sum: Total impact of bearish contracts
+        - neutral_impact_sum: Total impact of neutral contracts
+        - total_contracts_scored: Number of contracts analyzed
     """
-    sorted_contracts = sorted(scored_contracts, key=lambda c: c.get("impact_score", 0), reverse=True)
-    return sorted_contracts[:top_n]
-
-
-def calculate_average_impact_score(contracts: list[dict]) -> float:
-    """Calculate the average impact score of a list of contracts.
+    bullish = [c for c in scored_contracts if c.get("direction") == "Bullish"]
+    bearish = [c for c in scored_contracts if c.get("direction") == "Bearish"]
+    neutral = [c for c in scored_contracts if c.get("direction") == "Neutral"]
     
-    Args:
-        contracts: List of contracts with impact_score
+    bull_sum = sum(c.get("impact_score", 0) for c in bullish)
+    bear_sum = sum(c.get("impact_score", 0) for c in bearish)
+    neut_sum = sum(c.get("impact_score", 0) for c in neutral)
     
-    Returns:
-        Average impact score (0-100)
-    """
-    if not contracts:
-        return 0.0
-    total = sum(c.get("impact_score", 0) for c in contracts)
-    return round(total / len(contracts), 2)
+    directional_sum = bull_sum + bear_sum
+    if directional_sum == 0:
+        return {
+            "predicted_direction": "Neutral",
+            "confidence_pct": 0.0,
+            "bullish_impact_sum": bull_sum,
+            "bearish_impact_sum": bear_sum,
+            "neutral_impact_sum": neut_sum,
+            "total_contracts_scored": len(scored_contracts),
+        }
+    
+    if bull_sum > bear_sum:
+        direction = "Bullish"
+        confidence = bull_sum / directional_sum * 100
+    elif bear_sum > bull_sum:
+        direction = "Bearish"
+        confidence = bear_sum / directional_sum * 100
+    else:
+        direction = "Neutral"
+        confidence = 50.0
+    
+    return {
+        "predicted_direction": direction,
+        "confidence_pct": round(confidence, 1),
+        "bullish_impact_sum": bull_sum,
+        "bearish_impact_sum": bear_sum,
+        "neutral_impact_sum": neut_sum,
+        "total_contracts_scored": len(scored_contracts),
+    }
 
 
 def score_contracts(contracts: list[dict]) -> dict[str, Any]:
     """Main entry point: Score contracts for S&P 500 impact.
     
-    1. Filter out obviously irrelevant contracts (sports, entertainment, etc.)
-    2. LLM scores remaining contracts for impact (0-100) and direction
-    3. Sort by impact score and get top 5
-    4. Calculate average of top 5
+    1. Filter by consensus (majority consensus)
+    2. LLM classifies which contracts are economic/financial
+    3. LLM scores remaining contracts for impact (0-100) and direction
+    4. Predict market direction
     
     Args:
         contracts: List of contract dicts to score
@@ -223,39 +302,67 @@ def score_contracts(contracts: list[dict]) -> dict[str, Any]:
     Returns:
         Dict containing:
         - all_scored_contracts: All contracts with impact_score and direction
-        - top_contracts: Top 5 contracts by impact score
-        - avg_impact_score: Average impact score of top 5
+        - market_prediction: Market direction prediction with confidence
     """
-    relevant_contracts = filter_irrelevant_contracts(contracts)
+    print(f"  Filtering {len(contracts)} contracts by consensus (majority consensus)...")
+    consensus_contracts = filter_by_consent(contracts)
+    print(f"  After consensus filter: {len(consensus_contracts)} contracts")
     
-    if not relevant_contracts:
-        print("  No relevant contracts after filtering")
+    if not consensus_contracts:
+        print("  No contracts after consensus filter")
         return {
             "all_scored_contracts": [],
-            "top_contracts": [],
-            "avg_impact_score": 0.0,
+            "market_prediction": {
+                "predicted_direction": "Neutral",
+                "confidence_pct": 0.0,
+                "bullish_impact_sum": 0,
+                "bearish_impact_sum": 0,
+                "neutral_impact_sum": 0,
+                "total_contracts_scored": 0,
+            },
         }
     
-    print(f"  Using LLM to score {len(relevant_contracts)} relevant contracts...")
+    print(f"  Using LLM to classify {len(consensus_contracts)} contracts as economic/financial...")
+    economic_contracts = classify_economic_financial_with_llm(consensus_contracts, batch_size=10)
+    
+    if not economic_contracts:
+        print("  No economic/financial contracts after classification")
+        return {
+            "all_scored_contracts": [],
+            "market_prediction": {
+                "predicted_direction": "Neutral",
+                "confidence_pct": 0.0,
+                "bullish_impact_sum": 0,
+                "bearish_impact_sum": 0,
+                "neutral_impact_sum": 0,
+                "total_contracts_scored": 0,
+            },
+        }
+    
+    print(f"  Scoring {len(economic_contracts)} economic/financial contracts...")
     try:
-        scored_contracts = score_contracts_with_llm(relevant_contracts, batch_size=10)
-        top_contracts = get_top_impact_contracts(scored_contracts, top_n=5)
-        avg_impact_score = calculate_average_impact_score(top_contracts)
+        scored_contracts = score_contracts_with_llm(economic_contracts, batch_size=10)
         
-        print(f"\n  Top 5 impact contracts:")
-        for i, contract in enumerate(top_contracts, 1):
-            print(f"    {i}. [{contract.get('impact_score')}] {contract.get('direction')} - {contract.get('question', '')[:60]}...")
-        print(f"\n  Average impact score (top 5): {avg_impact_score}")
+        market_prediction = predict_market_direction(scored_contracts)
+        print(f"\n  Market Direction Prediction:")
+        print(f"    Predicted Direction: {market_prediction['predicted_direction']}")
+        print(f"    Confidence: {market_prediction['confidence_pct']}%")
+        print(f"    Bullish Impact: {market_prediction['bullish_impact_sum']} | Bearish Impact: {market_prediction['bearish_impact_sum']} | Neutral Impact: {market_prediction['neutral_impact_sum']}")
         
         return {
             "all_scored_contracts": scored_contracts,
-            "top_contracts": top_contracts,
-            "avg_impact_score": avg_impact_score,
+            "market_prediction": market_prediction,
         }
     except Exception as e:
         print(f"  Warning: LLM scoring failed ({e})")
         return {
             "all_scored_contracts": [],
-            "top_contracts": [],
-            "avg_impact_score": 0.0,
+            "market_prediction": {
+                "predicted_direction": "Neutral",
+                "confidence_pct": 0.0,
+                "bullish_impact_sum": 0,
+                "bearish_impact_sum": 0,
+                "neutral_impact_sum": 0,
+                "total_contracts_scored": 0,
+            },
         }

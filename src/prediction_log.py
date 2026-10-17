@@ -2,14 +2,13 @@
 Prediction logging module.
 
 Saves each prediction run to two CSV files:
-- data/predictions.csv: Average impact score, top 5 contracts, and S&P 500 data
+- data/predictions.csv: Market direction prediction and S&P 500 data
 - data/detail.csv: Individual Polymarket contracts with impact scores
 """
 
 import csv
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
 
 
 def get_data_dir() -> Path:
@@ -43,23 +42,19 @@ def generate_prediction_id(timestamp: str) -> str:
 
 def get_predictions_headers() -> list:
     """Get the standard predictions CSV headers."""
-    headers = [
+    return [
         "prediction_id",
         "timestamp",
-        "avg_impact_score",
-    ]
-    for i in range(1, 6):
-        headers.extend([
-            f"top{i}_question",
-            f"top{i}_impact_score",
-            f"top{i}_direction",
-        ])
-    headers.extend([
+        "predicted_direction",
+        "confidence_pct",
+        "bullish_impact_sum",
+        "bearish_impact_sum",
+        "neutral_impact_sum",
+        "total_contracts_scored",
         "sp500_price",
         "sp500_daily_change_pct",
         "sp500_weekly_change_pct",
-    ])
-    return headers
+    ]
 
 
 def get_detail_headers() -> list:
@@ -73,6 +68,7 @@ def get_detail_headers() -> list:
         "contract_yes_price",
         "impact_score",
         "direction",
+        "reason",
     ]
 
 
@@ -93,21 +89,19 @@ def init_csv_files():
 
 
 def log_prediction(
-    avg_impact_score: float,
-    top_contracts: list,
     market_context: dict,
     timestamp: str = None,
     contracts_data: list = None,
+    market_prediction: dict = None,
 ) -> dict:
     """
     Log a prediction to CSV files.
     
     Args:
-        avg_impact_score: Average impact score of top 5 contracts (0-100)
-        top_contracts: List of top 5 contracts with impact_score and direction
         market_context: Market snapshot data from get_realtime_sp500_data()
         timestamp: Optional custom timestamp (ISO format). If None, uses current time.
         contracts_data: List of contract dicts with impact_score and direction
+        market_prediction: Dict with predicted_direction, confidence_pct, and breakdown sums
     
     Returns:
         The logged prediction dict
@@ -120,19 +114,22 @@ def log_prediction(
     prediction_row = {
         "prediction_id": prediction_id,
         "timestamp": ts,
-        "avg_impact_score": avg_impact_score,
     }
     
-    for i in range(1, 6):
-        if i <= len(top_contracts):
-            contract = top_contracts[i - 1]
-            prediction_row[f"top{i}_question"] = contract.get("question", "")
-            prediction_row[f"top{i}_impact_score"] = contract.get("impact_score", 0)
-            prediction_row[f"top{i}_direction"] = contract.get("direction", "Neutral")
-        else:
-            prediction_row[f"top{i}_question"] = ""
-            prediction_row[f"top{i}_impact_score"] = ""
-            prediction_row[f"top{i}_direction"] = ""
+    if market_prediction:
+        prediction_row["predicted_direction"] = market_prediction.get("predicted_direction", "Neutral")
+        prediction_row["confidence_pct"] = market_prediction.get("confidence_pct", 0.0)
+        prediction_row["bullish_impact_sum"] = market_prediction.get("bullish_impact_sum", 0)
+        prediction_row["bearish_impact_sum"] = market_prediction.get("bearish_impact_sum", 0)
+        prediction_row["neutral_impact_sum"] = market_prediction.get("neutral_impact_sum", 0)
+        prediction_row["total_contracts_scored"] = market_prediction.get("total_contracts_scored", 0)
+    else:
+        prediction_row["predicted_direction"] = ""
+        prediction_row["confidence_pct"] = ""
+        prediction_row["bullish_impact_sum"] = ""
+        prediction_row["bearish_impact_sum"] = ""
+        prediction_row["neutral_impact_sum"] = ""
+        prediction_row["total_contracts_scored"] = ""
     
     prediction_row["sp500_price"] = market_context.get("sp500_price", 0)
     prediction_row["sp500_daily_change_pct"] = market_context.get("sp500_daily_change_pct", 0)
@@ -157,66 +154,11 @@ def log_prediction(
                     "contract_yes_price": contract.get("yes_price", 0),
                     "impact_score": contract.get("impact_score", 0),
                     "direction": contract.get("direction", "Neutral"),
+                    "reason": contract.get("reason", ""),
                 }
                 writer.writerow(detail_row)
     
     return prediction_row
-
-
-def load_predictions(days: int = None) -> list[dict]:
-    """
-    Load predictions from the predictions CSV file.
-    
-    Args:
-        days: If specified, only load predictions from the last N days
-    
-    Returns:
-        List of prediction dicts
-    """
-    predictions_csv = get_predictions_csv()
-    
-    if not predictions_csv.exists():
-        return []
-    
-    predictions = []
-    with open(predictions_csv, "r") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if days is not None:
-                cutoff = datetime.now(timezone.utc).timestamp() - (days * 24 * 60 * 60)
-                pred_ts = datetime.fromisoformat(row["timestamp"]).timestamp()
-                if pred_ts < cutoff:
-                    continue
-            
-            predictions.append(row)
-    
-    return predictions
-
-
-def load_detail(prediction_id: str = None) -> list[dict]:
-    """
-    Load contract details from the detail CSV file.
-    
-    Args:
-        prediction_id: If specified, only load details for this prediction
-    
-    Returns:
-        List of detail dicts
-    """
-    detail_csv = get_detail_csv()
-    
-    if not detail_csv.exists():
-        return []
-    
-    details = []
-    with open(detail_csv, "r") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if prediction_id is not None and row.get("prediction_id") != prediction_id:
-                continue
-            details.append(row)
-    
-    return details
 
 
 def get_prediction_count() -> int:
@@ -231,12 +173,3 @@ def get_prediction_count() -> int:
         return 0
     with open(predictions_csv, "r") as f:
         return sum(1 for _ in f) - 1
-
-
-def get_prediction_by_id(prediction_id: str) -> Optional[dict]:
-    """Get a specific prediction by ID."""
-    predictions = load_predictions()
-    for pred in predictions:
-        if pred.get("prediction_id") == prediction_id:
-            return pred
-    return None

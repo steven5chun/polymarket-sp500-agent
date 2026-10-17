@@ -1,29 +1,6 @@
 import os
 
 
-def get_llm():
-    """Get LLM identifier string for CrewAI agents."""
-    provider = os.getenv("LLM_PROVIDER", "openai").lower()
-
-    if provider == "ollama":
-        model = os.getenv("OLLAMA_MODEL", "llama3")
-        return f"ollama/{model}"
-
-    if provider == "qwen":
-        api_key = os.getenv("QWEN_API_KEY", "")
-        model = os.getenv("QWEN_MODEL", "qwen-plus")
-        api_base = os.getenv(
-            "QWEN_API_BASE",
-            "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
-        )
-        os.environ["OPENAI_API_KEY"] = api_key
-        os.environ["OPENAI_API_BASE"] = api_base
-        return f"openai/{model}"
-
-    model = os.getenv("OPENAI_MODEL", "gpt-4o")
-    return f"openai/{model}"
-
-
 def get_llm_object():
     """Get actual LangChain LLM object for direct invocation."""
     from langchain_openai import ChatOpenAI

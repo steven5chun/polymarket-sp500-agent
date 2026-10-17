@@ -1,0 +1,2 @@
+prediction_id,timestamp,predicted_direction,confidence_pct,bullish_impact_sum,bearish_impact_sum,neutral_impact_sum,total_contracts_scored,sp500_price,sp500_daily_change_pct,sp500_weekly_change_pct
+pred_20261017_932,2026-10-17T07:04:21.885968+00:00,Bullish,71.1,320,130,60,9,7659.44,-1.09,-1.36
