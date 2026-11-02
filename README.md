@@ -472,7 +472,7 @@ Qwen's API has content moderation that may block political/geopolitical content 
 | File | Purpose |
 |------|---------|
 | [README.md](README.md) | Setup, usage, data flow, CSV format |
-| [polymarket-discovery.md](polymarket-discovery.md) | Agent details, sector weights, scoring formulas |
+| [polymarket-discovery.md](polymarket-discovery.md) | Agent details, filtering, classification, scoring |
 
 
 

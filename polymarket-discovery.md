@@ -62,7 +62,7 @@ The system fetches ALL active Polymarket contracts (no search query needed) usin
 - `fetch_all_markets()` - Fetches all active markets via multiple API segments (low-vol, high-vol, recent)
 - `fetch_and_cache_contracts()` - Filters by volume > $50K OR liquidity > $50K, removes expired contracts, caches to `data/polymarket-contracts.csv`
 
-The Discovery Agent (`src/agents/discovery_agent.py`) directly calls the data harvester and impact scorer without CrewAI orchestration.
+The Discovery Agent (`src/agents/discovery_agent.py`) directly calls the data filter and impact scorer without CrewAI orchestration.
 
 ### Contract Expiry Filtering
 
