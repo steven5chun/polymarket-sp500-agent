@@ -93,6 +93,10 @@ This project leverages the **"Wisdom of the Crowds"** by tracking [prediction ma
 - **Zero-Account Data** - Polymarket API requires no authentication
 
 ---
+## InfoGraphic: How Polymarket S&P500 Indicator works
+![](/images/polymarket-sp500-agent.jpeg)
+
+---
 
 ## How Scoring & Prediction Works
 
